@@ -16,4 +16,4 @@ dependencyResolutionManagement {
 rootProject.name = "SpaceExplorer"
 include(":app")
 include(":domain")
-
+include(":data")
