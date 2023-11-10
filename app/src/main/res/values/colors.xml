@@ -2,4 +2,12 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+<!-- Extracted from https://nasa.github.io/nasawds-site/components/colors/ -->
+    <color name="blue">#FF105BD8</color>
+    <color name="blue_dark">#FF0B3D91</color>
+    <color name="red">#FFDD361C</color>
+    <color name="red_dark">#FF99231B</color>
+    <color name="green">#FF2E8540</color>
+    <color name="grey_with_alpha">#803F3F3F</color>
 </resources>
