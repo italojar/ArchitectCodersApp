@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav_graph.xml"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="es.architectcoders.spaceexplorer.components.home.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/roversFragment"
+        android:name="es.architectcoders.spaceexplorer.components.rovers.RoversFragment"
+        android:label="fragment_rovers"
+        tools:layout="@layout/fragment_rovers" />
+    <fragment
+        android:id="@+id/marsFragment"
+        android:name="es.architectcoders.spaceexplorer.components.mars.MarsFragment"
+        android:label="fragment_mars"
+        tools:layout="@layout/fragment_mars" />
+    <fragment
+        android:id="@+id/favouriteFragment"
+        android:name="es.architectcoders.spaceexplorer.components.favourite.FavouriteFragment"
+        android:label="fragment_favourite"
+        tools:layout="@layout/fragment_favourite" />
+</navigation>
