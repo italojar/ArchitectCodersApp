@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SpaceExplorer</string>
+    <string name="app_name">Space Explorer</string>
     <string name="home">Home</string>
     <string name="rovers">Rovers</string>
     <string name="mars">Mars</string>
