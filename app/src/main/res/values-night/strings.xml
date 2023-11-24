@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name">Space Explorer</string>
     <string name="home">Home</string>
+    <string name="rovers">Rovers</string>
+    <string name="mars">Mars</string>
     <string name="favourite">Favourite</string>
 </resources>
