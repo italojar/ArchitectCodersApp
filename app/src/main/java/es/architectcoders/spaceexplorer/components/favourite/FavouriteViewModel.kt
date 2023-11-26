@@ -1,7 +1,10 @@
 package es.architectcoders.spaceexplorer.components.favourite
 
 import androidx.lifecycle.ViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class FavouriteViewModel : ViewModel() {
+@HiltViewModel
+class FavouriteViewModel @Inject constructor() : ViewModel() {
     // TODO: Implement the ViewModel
 }
