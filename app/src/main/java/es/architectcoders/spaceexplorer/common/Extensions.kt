@@ -1,83 +1,35 @@
 package es.architectcoders.spaceexplorer.common
 
 import android.view.View
-import android.view.animation.Animation
-import android.view.animation.Transformation
+import android.widget.ImageButton
 import android.widget.ImageView
+import android.widget.LinearLayout
 import com.bumptech.glide.Glide
-import com.google.android.material.card.MaterialCardView
 import es.architectcoders.spaceexplorer.R
 
 fun ImageView.loadUrl(url: String?) {
     Glide.with(context).load(url).error(R.mipmap.ic_launcher).into(this)
 }
 
-fun MaterialCardView.getExpandAnimation(targetView: View): Animation {
-    val initialHeight = this.height
-    val targetHeight = initialHeight + targetView.height
-
-    val animation: Animation = object : Animation() {
-        override fun applyTransformation(interpolatedTime: Float, transformation: Transformation?) {
-            layoutParams.height =
-                (initialHeight + (targetHeight - initialHeight) * interpolatedTime).toInt()
-            requestLayout()
-        }
-
-        override fun willChangeBounds(): Boolean {
-            return true
-        }
+fun LinearLayout.toggleVisibilityWithAnimation(imageButton: ImageButton, duration: Long = 200) {
+    if (visibility == View.VISIBLE) {
+        animateVisibilityWithAnimation(false, duration, imageButton)
+    } else {
+        animateVisibilityWithAnimation(true, duration, imageButton)
     }
-
-    animation.duration = 200
-
-    animation.setAnimationListener(object : Animation.AnimationListener {
-        override fun onAnimationStart(animation: Animation?) {
-            // No es necesario realizar acciones al inicio de la animación
-        }
-
-        override fun onAnimationEnd(animation: Animation?) {
-            targetView.visibility = View.VISIBLE
-        }
-
-        override fun onAnimationRepeat(animation: Animation?) {
-            // No es necesario realizar acciones en repeticiones de la animación
-        }
-    })
-
-    return animation
 }
 
-fun MaterialCardView.getCollapseAnimation(targetView: View): Animation {
-    val initialHeight = this.height
-    val targetHeight = initialHeight - targetView.height
+private fun LinearLayout.animateVisibilityWithAnimation(show: Boolean, duration: Long, imageButton: ImageButton) {
+    val targetAlpha = if (show) 1f else 0f
 
-    val animation: Animation = object : Animation() {
-        override fun applyTransformation(interpolatedTime: Float, transformation: Transformation?) {
-            layoutParams.height =
-                (initialHeight - (initialHeight - targetHeight) * interpolatedTime).toInt()
-            requestLayout()
+    animate()
+        .alpha(targetAlpha)
+        .setDuration(duration)
+        .withEndAction {
+            visibility = if (show) View.VISIBLE else View.GONE
+            alpha = 1f
+            val imageResource = if (show) R.drawable.ic_expand_less else R.drawable.ic_expand_more
+            imageButton.setImageResource(imageResource)
         }
-
-        override fun willChangeBounds(): Boolean {
-            return true
-        }
-    }
-
-    animation.duration = 200
-
-    animation.setAnimationListener(object : Animation.AnimationListener {
-        override fun onAnimationStart(animation: Animation?) {
-            // No es necesario realizar acciones al inicio de la animación
-        }
-
-        override fun onAnimationEnd(animation: Animation?) {
-            targetView.visibility = View.GONE
-        }
-
-        override fun onAnimationRepeat(animation: Animation?) {
-            // No es necesario realizar acciones en repeticiones de la animación
-        }
-    })
-
-    return animation
+        .start()
 }

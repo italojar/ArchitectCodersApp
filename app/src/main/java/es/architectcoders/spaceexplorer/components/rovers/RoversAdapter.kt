@@ -8,6 +8,7 @@ import android.widget.LinearLayout
 import androidx.recyclerview.widget.RecyclerView
 import es.architectcoders.spaceexplorer.R
 import es.architectcoders.spaceexplorer.common.loadUrl
+import es.architectcoders.spaceexplorer.common.toggleVisibilityWithAnimation
 import es.architectcoders.spaceexplorer.databinding.RoversItemBinding
 
 class RoversAdapter(private val listRovers: List<RoversObject>) :
@@ -24,31 +25,15 @@ class RoversAdapter(private val listRovers: List<RoversObject>) :
         val llData: LinearLayout = holder.view.llData
         val ibExpand: ImageButton = holder.view.ibExpand
 
-        holder.view.ivRoverPhoto.loadUrl(item.photo)
-        holder.view.tvSol.text = item.sol.toString()
-        holder.view.tvCamara.text = item.camera
-        holder.view.tvEarthDate.text = item.earth_date
+        with(holder.view) {
+            ivRoverPhoto.loadUrl(item.photo)
+            tvSol.text = item.sol.toString()
+            tvCamara.text = item.camera
+            tvEarthDate.text = item.earth_date
+        }
 
         ibExpand.setOnClickListener {
-            if (llData.visibility == View.VISIBLE) {
-                llData.animate()
-                    .alpha(0f)
-                    .setDuration(200)
-                    .withEndAction {
-                        llData.visibility = View.GONE
-                        llData.alpha = 1f
-                        ibExpand.setImageResource(R.drawable.ic_expand_more)
-                    }
-                    .start()
-            } else {
-                llData.visibility = View.VISIBLE
-                llData.alpha = 0f
-                llData.animate()
-                    .alpha(1f)
-                    .setDuration(200)
-                    .start()
-                ibExpand.setImageResource(R.drawable.ic_expand_less)
-            }
+            llData.toggleVisibilityWithAnimation(ibExpand)
         }
     }
 
