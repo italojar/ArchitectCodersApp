@@ -6,6 +6,7 @@ buildscript {
     }
     dependencies {
         classpath("com.google.android.libraries.mapsplatform.secrets-gradle-plugin:secrets-gradle-plugin:2.0.1")
+        classpath("com.google.dagger:hilt-android-gradle-plugin:2.49")
     }
 }
 plugins {
@@ -13,7 +14,7 @@ plugins {
     id("org.jetbrains.kotlin.android") version "1.9.0" apply false
     id("com.android.library") version "8.1.2" apply false
     //hilt
-    id("com.google.dagger.hilt.android") version "2.44" apply false
+    id("com.google.dagger.hilt.android") version "2.49" apply false
     //secrets-gradle-plugin
     id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin") version "2.0.1" apply false
     //navigation-safe-args
