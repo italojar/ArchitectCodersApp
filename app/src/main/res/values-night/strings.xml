@@ -5,4 +5,6 @@
     <string name="rovers">Rovers</string>
     <string name="mars">Mars</string>
     <string name="favourite">Favourite</string>
+    <string name="see_more"><u>See more</u></string>
+    <string name="copyright">© %1$s</string>
 </resources>

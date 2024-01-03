@@ -4,4 +4,8 @@
     <string name="rovers">Rovers</string>
     <string name="mars">Mars</string>
     <string name="favourite">Favourite</string>
+    <string name="see_more"><u>See more</u></string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="copyright">© %1$s</string>
 </resources>
