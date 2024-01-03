@@ -28,29 +28,30 @@
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/ic_nasa_logo"
-                android:contentDescription="Mars photo"/>
+                tools:src="@drawable/ic_nasa_logo"
+                android:contentDescription="@null"/>
 
             <androidx.appcompat.widget.AppCompatImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
                 android:src="@drawable/ic_bottom_nav_favorite"
                 android:background="@android:color/transparent"
+                android:padding="4dp"
                 android:layout_gravity="end"
-                android:layout_margin="8dp"
                 android:clickable="true"
-                android:focusable="true" />
+                android:focusable="true"
+                android:contentDescription="@null"/>
 
             <ImageButton
                 android:id="@+id/ibExpand"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
                 android:src="@drawable/ic_expand_more"
                 android:background="@android:color/transparent"
                 android:layout_gravity="bottom|end"
-                android:layout_margin="8dp"
                 android:clickable="true"
-                android:focusable="true" />
+                android:focusable="true"
+                android:contentDescription="@null"/>
             </FrameLayout>
         <LinearLayout
             android:id="@+id/llData"
