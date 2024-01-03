@@ -1,4 +1,4 @@
-package es.architectcoders.spaceexplorer.components.rovers
+package es.architectcoders.spaceexplorer.model
 
 data class RoversObject(
     val photo: String,

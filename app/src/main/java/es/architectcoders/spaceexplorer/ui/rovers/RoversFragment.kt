@@ -1,13 +1,14 @@
-package es.architectcoders.spaceexplorer.components.rovers
+package es.architectcoders.spaceexplorer.ui.rovers
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import dagger.hilt.android.AndroidEntryPoint
 import es.architectcoders.spaceexplorer.databinding.FragmentRoversBinding
+import es.architectcoders.spaceexplorer.model.RoversObject
 
 @AndroidEntryPoint
 class RoversFragment : Fragment() {
@@ -35,13 +36,14 @@ class RoversFragment : Fragment() {
             RoversObject("https://static.nationalgeographic.es/files/styles/image_3200/public/01marscuriosityturns3.ngsversion.1470424028586.jpg?w=1900&h=1267",
                 1003,
                 "Camara de navegacion",
-                "2022-12-07"))
+                "2022-12-07")
+        )
             )
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentRoversBinding.inflate(inflater, container, false)
         return binding.root
     }

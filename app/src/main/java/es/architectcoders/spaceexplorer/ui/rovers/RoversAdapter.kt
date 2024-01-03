@@ -1,15 +1,14 @@
-package es.architectcoders.spaceexplorer.components.rovers
+package es.architectcoders.spaceexplorer.ui.rovers
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.LinearLayout
 import androidx.recyclerview.widget.RecyclerView
-import es.architectcoders.spaceexplorer.R
 import es.architectcoders.spaceexplorer.common.loadUrl
 import es.architectcoders.spaceexplorer.common.toggleVisibilityWithAnimation
 import es.architectcoders.spaceexplorer.databinding.RoversItemBinding
+import es.architectcoders.spaceexplorer.model.RoversObject
 
 class RoversAdapter(private val listRovers: List<RoversObject>) :
     RecyclerView.Adapter<RoversAdapter.ViewHolder>() {

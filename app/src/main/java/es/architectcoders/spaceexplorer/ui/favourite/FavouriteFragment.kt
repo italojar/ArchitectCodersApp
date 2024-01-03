@@ -1,4 +1,4 @@
-package es.architectcoders.spaceexplorer.components.mars
+package es.architectcoders.spaceexplorer.ui.favourite
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -10,24 +10,24 @@ import dagger.hilt.android.AndroidEntryPoint
 import es.architectcoders.spaceexplorer.R
 
 @AndroidEntryPoint
-class MarsFragment : Fragment() {
+class FavouriteFragment : Fragment() {
 
     companion object {
-        fun newInstance() = MarsFragment()
+        fun newInstance() = FavouriteFragment()
     }
 
-    private lateinit var viewModel: MarsViewModel
+    private lateinit var viewModel: FavouriteViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_mars, container, false)
+        return inflater.inflate(R.layout.fragment_favourite, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(MarsViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(FavouriteViewModel::class.java)
         // TODO: Use the ViewModel
     }
 
