@@ -1,12 +1,21 @@
 package es.architectcoders.spaceexplorer.common
 
+import android.view.MenuItem
 import android.view.View
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.LinearLayout
+import androidx.navigation.NavController
 import com.bumptech.glide.Glide
 import es.architectcoders.spaceexplorer.R
 
+
+fun MenuItem.onHomeSelected(navController: NavController) {
+    this.setOnMenuItemClickListener { menuItem ->
+        navController.navigate(menuItem.itemId)
+        true
+    }
+}
 fun ImageView.loadUrl(url: String?) {
     Glide.with(context).load(url).error(R.mipmap.ic_launcher).into(this)
 }

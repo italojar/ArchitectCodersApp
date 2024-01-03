@@ -1,21 +1,12 @@
 package es.architectcoders.domain.usecase
 
-import android.util.Log
 import es.architectcoders.data.repository.ApodRepository
+import es.architectcoders.domain.mapper.toDomain
+import es.architectcoders.domain.model.Apod
 import javax.inject.Inject
 
 class GetApodUseCase @Inject constructor(
     private val apodRepository: ApodRepository
 ) {
-
-    suspend operator fun invoke(): String {
-        val apod = apodRepository.getApod()
-        return if (apod != null) {
-            Log.d("GetApodUseCase", apod.toString())
-            "$apod"
-        } else {
-            "error"
-        }
-    }
-
+    suspend operator fun invoke(): Apod = apodRepository.getApod()?.toDomain() ?: Apod()
 }
