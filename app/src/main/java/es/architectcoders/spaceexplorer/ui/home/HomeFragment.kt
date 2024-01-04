@@ -13,6 +13,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import dagger.hilt.android.AndroidEntryPoint
 import es.architectcoders.spaceexplorer.databinding.FragmentHomeBinding
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -35,31 +37,61 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         homeState = this.buildHomeState(binding)
+
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.state.collect { state ->
-                    binding.updateState(state) }
+                viewModel.state
+                    .map { state -> state.loading }
+                    .distinctUntilChanged()
+                    .collect { loading ->
+                        val shimmerLayout = binding.shimmerLayout
+                        if (loading) shimmerLayout.startShimmer() else shimmerLayout.stopShimmer()
+                    }
             }
         }
-    }
 
-    private fun FragmentHomeBinding.updateState(uiState: HomeViewModel.UiState) {
-        uiState.let { state ->
-            if (state.loading) { shimmerLayout.startShimmer() } else { shimmerLayout.stopShimmer() }
-            state.apod?.let { apod ->
-                homeState.updateUi(apod)
-                ivApodFav.setOnClickListener { viewModel.saveApodAsFavourite(apod) }
-                cvRover.setOnClickListener { viewModel.onApodClicked(apod) }
-                tvSeeMore.setOnClickListener { viewModel.onApodClicked(apod) }
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner. repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.state
+                    .map { state -> state.apod }
+                    .distinctUntilChanged()
+                    .collect { apod ->
+                        apod?.let {
+                            homeState.updateUi(apod)
+                            binding.ivApodFav.setOnClickListener { viewModel.saveApodAsFavourite(apod) }
+                            binding.cvRover.setOnClickListener { viewModel.onApodClicked(apod) }
+                            binding.tvSeeMore.setOnClickListener { viewModel.onApodClicked(apod) }
+                        }
+                    }
             }
-            state.navigateTo?.let { apodObject ->
-                homeState.navigateToDetail(
-                    apodArgs = apodObject,
-                    afterNavigate = { viewModel.onApodNavigationDone() }
-                )
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.state
+                    .map { state -> state.navigateTo }
+                    .distinctUntilChanged()
+                    .collect { navArgs ->
+                        navArgs?.let {
+                            homeState.navigateToDetail(
+                                apodArgs = navArgs,
+                                afterNavigate = { viewModel.onApodNavigationDone() } )
+                        }
+                    }
             }
-            if (state.onBackPressed) { homeState.onBackPressed() }
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.state
+                    .map { state -> state.onBackPressed }
+                    .distinctUntilChanged()
+                    .collect { onBackPressed ->
+                        if (onBackPressed) { homeState.onBackPressed() }
+                    }
+            }
         }
     }
 

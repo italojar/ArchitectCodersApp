@@ -29,10 +29,6 @@ class HomeViewModel @Inject constructor(
     val state: StateFlow<UiState> = _state.asStateFlow()
 
     init {
-        onUiStart()
-    }
-
-    private fun onUiStart() {
         viewModelScope.launch {
             _state.value = UiState(loading = true)
             _state.value = UiState(apod = getApodUseCase().toViewObject())
