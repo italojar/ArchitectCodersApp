@@ -29,15 +29,21 @@ class HomeState(
     fun onBackPressed() { fragment.requireActivity().finish() }
 
     fun updateUi(apod: ApodObject) {
-        binding.cvRover.visibility = View.VISIBLE
-        binding.ivRoverPhoto.loadUrl(apod.url)
+        binding.cvApod.visibility = View.VISIBLE
+        binding.ivApodPhoto.loadUrl(apod.url)
+        binding.ivApodPhoto.ratio = 1.5f
         binding.tvTitle.text = apod.title
         binding.tvDate.text = apod.date
         binding.tvExplanation.text = apod.explanation
+        if (apod.favorite) {
+            binding.ivApodFav.setImageResource(R.drawable.ic_favorite_fill)
+        } else {
+            binding.ivApodFav.setImageResource(R.drawable.ic_bottom_nav_favorite)
+        }
         if (apod.copyright.isNotEmpty()) {
             binding.tvCopyright.text = fragment.getString(R.string.copyright, apod.copyright)
         } else {
-            binding.tvCopyright.visibility = View.GONE
+            binding.tvCopyright.visibility = View.INVISIBLE
         }
     }
 
