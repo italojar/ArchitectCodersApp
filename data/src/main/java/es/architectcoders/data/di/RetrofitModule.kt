@@ -4,7 +4,10 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import es.architectcoders.data.source.network.service.ApodApiClient
+import es.architectcoders.data.BuildConfig
+import es.architectcoders.data.source.network.ApodApiClient
+import es.architectcoders.data.source.network.NasaInterceptor
+import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
@@ -15,10 +18,10 @@ object  RetrofitModule {
 
     @Provides
     @Singleton
-    fun provideRetrofit(): Retrofit {
+    fun provideRetrofit(nasaClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("https://api.nasa.gov/")
-            //.client()
+            .baseUrl(BuildConfig.BASE_URL)
+            .client(nasaClient)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
@@ -29,4 +32,9 @@ object  RetrofitModule {
         return retrofit.create(ApodApiClient::class.java)
     }
 
+    @Provides
+    @Singleton
+    fun provideClient(interceptor: NasaInterceptor): OkHttpClient {
+        return OkHttpClient.Builder().addInterceptor(interceptor).build()
+    }
 }
