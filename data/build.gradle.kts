@@ -25,6 +25,9 @@ android {
             }
         }
 
+        buildFeatures {
+            buildConfig = true
+        }
 
     }
 
@@ -67,6 +70,8 @@ dependencies {
     annotationProcessor("androidx.room:room-compiler:2.6.0")
     // To use Kotlin annotation processing tool (kapt)
     kapt("androidx.room:room-compiler:2.6.0")
+    // Maps
+    implementation("com.google.android.gms:play-services-maps:18.2.0")
     //Test
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
