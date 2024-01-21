@@ -1,6 +1,7 @@
 package es.architectcoders.domain.model
 
 data class Apod(
+    val id: Int,
     val copyright: String,
     val date: String,
     val explanation: String,
@@ -8,8 +9,9 @@ data class Apod(
     val mediaType: String,
     val serviceVersion: String,
     val title: String,
-    val url: String
+    val url: String,
+    val favorite: Boolean
 ) {
-    constructor() : this("", "", "",
-        "", "", "", "", "")
+    constructor() : this( 0, "", "", "",
+        "", "", "", "", "", false)
 }

@@ -12,6 +12,6 @@ data class ApodResponse(
     val title: String,
     val url: String
 ) {
-    constructor() : this("", "", "",
-        "", "", "", "", "")
+    constructor() : this( "" ,"", "", "",
+        "", "", "", "")
 }

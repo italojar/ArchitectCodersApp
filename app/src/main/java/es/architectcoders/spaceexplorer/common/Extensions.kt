@@ -5,9 +5,17 @@ import android.view.View
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.LinearLayout
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.NavController
 import com.bumptech.glide.Glide
+import es.architectcoders.domain.model.Apod
 import es.architectcoders.spaceexplorer.R
+import es.architectcoders.spaceexplorer.model.ApodObject
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 
 
 fun MenuItem.onHomeSelected(navController: NavController) {
@@ -42,3 +50,38 @@ private fun LinearLayout.animateVisibilityWithAnimation(show: Boolean, duration:
         }
         .start()
 }
+
+
+fun LifecycleOwner.launchAndCollect(
+    state: Lifecycle.State = Lifecycle.State.STARTED,
+    block: suspend CoroutineScope.() -> Unit
+) = lifecycleScope.launch {
+    lifecycle.repeatOnLifecycle(state, block)
+}
+
+
+fun ApodObject.toDomain() = Apod(
+    id = id,
+    copyright = copyright,
+    date = date,
+    explanation = explanation,
+    hdurl = hdurl,
+    mediaType = mediaType,
+    serviceVersion = serviceVersion,
+    title = title,
+    url = url,
+    favorite = favorite
+)
+
+fun Apod.toViewObject() = ApodObject(
+    id = id,
+    copyright = copyright,
+    date = date,
+    explanation = explanation,
+    hdurl = hdurl,
+    mediaType = mediaType,
+    serviceVersion = serviceVersion,
+    title = title,
+    url = url,
+    favorite = favorite
+)

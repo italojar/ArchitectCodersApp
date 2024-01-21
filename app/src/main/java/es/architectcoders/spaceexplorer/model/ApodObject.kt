@@ -5,6 +5,7 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class ApodObject(
+    val id: Int,
     val copyright: String,
     val date: String,
     val explanation: String,
@@ -12,8 +13,9 @@ data class ApodObject(
     val mediaType: String,
     val serviceVersion: String,
     val title: String,
-    val url: String
+    val url: String,
+    val favorite: Boolean
 ): Parcelable {
-    constructor() : this("", "", "",
-        "", "", "", "", "")
+    constructor() : this(0, "", "", "",
+        "", "", "", "", "", false)
 }
