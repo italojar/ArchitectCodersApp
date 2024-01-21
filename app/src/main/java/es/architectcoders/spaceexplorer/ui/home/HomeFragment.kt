@@ -97,39 +97,23 @@ class HomeFragment : Fragment() {
                 .collect { error ->
                     if (error != null) {
                         when (error) {
-                            is Error.Server -> {
-                                val a = MaterialAlertDialogBuilder(requireContext())
-                                    .setTitle("An error has occurred")
-                                    .setMessage(getString(R.string.server_error))
-                                    .setNegativeButton("Cancel") { dialog, _ -> dialog.dismiss() }
-                                    .setPositiveButton("Try again") { _, _ -> viewModel.retry() }
-                                    .setCancelable(false)
-                                    .show()
-                            }
-
-                            is Error.Connectivity -> {
-                                MaterialAlertDialogBuilder(requireContext())
-                                    .setTitle("An error has occurred")
-                                    .setMessage(getString(R.string.connectivity_error))
-                                    .setNegativeButton("Cancel") { dialog, _ -> dialog.dismiss() }
-                                    .setPositiveButton("Try again") { _, _ -> viewModel.retry() }
-                                    .setCancelable(false)
-                                    .show()
-                            }
-
-                            is Error.Unknown -> {
-                                MaterialAlertDialogBuilder(requireContext())
-                                    .setTitle("An error has occurred")
-                                    .setNegativeButton("Cancel") { dialog, _ -> dialog.dismiss() }
-                                    .setMessage(getString(R.string.unknown_error))
-                                    .setPositiveButton("Try again") { _, _ ->  viewModel.retry() }
-                                    .setCancelable(false)
-                                    .show()
-                            }
+                            is Error.Server -> showErrorDialog(getString(R.string.server_error))
+                            is Error.Connectivity -> showErrorDialog(getString(R.string.connectivity_error))
+                            is Error.Unknown -> showErrorDialog(getString(R.string.unknown_error))
                         }
                     }
                 }
         }
+    }
+
+    private fun showErrorDialog(error: String) {
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle(getString(R.string.dialog_title_error))
+            .setMessage(error)
+            .setNegativeButton(getString(R.string.dialog_cancel)) { dialog, _ -> dialog.dismiss() }
+            .setPositiveButton(getString(R.string.dialog_retry)) { _, _ -> viewModel.retry() }
+            .setCancelable(false)
+            .show()
     }
 
     override fun onAttach(context: Context) {
