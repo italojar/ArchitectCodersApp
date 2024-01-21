@@ -7,7 +7,7 @@
     tools:context=".ui.home.HomeFragment">
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cvRover"
+        android:id="@+id/cvApod"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="8dp"
@@ -24,11 +24,11 @@
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-                <ImageView
-                    android:id="@+id/ivRoverPhoto"
+                <es.architectcoders.spaceexplorer.common.AspectRatioImageView
+                    android:id="@+id/ivApodPhoto"
                     android:layout_width="match_parent"
-                    android:layout_height="426dp"
-                    android:scaleType="centerCrop"
+                    android:layout_height="425dp"
+                    android:scaleType="fitXY"
                     tools:src="@drawable/ic_nasa_logo"
                     android:contentDescription="@null"/>
 
@@ -135,7 +135,7 @@
                     android:layout_marginVertical="8dp"
                     android:ellipsize="end"
                     android:fontFamily="@font/rubik_regular"
-                    android:lines="2"
+                    android:lines="3"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/tvExplanationTitle"
                     app:layout_constraintTop_toBottomOf="@+id/tvDate"
@@ -189,56 +189,91 @@
                         android:layout_width="match_parent"
                         android:layout_height="426dp"
                         android:scaleType="centerCrop"
+                        tools:src="@drawable/ic_nasa_logo"
                         android:contentDescription="@null"/>
                 </FrameLayout>
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/llDataShimmer"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    tools:visibility="visible">
 
                     <TextView
                         android:id="@+id/tvCopyrightShimmer"
-                        android:layout_width="120dp"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="end"
+                        android:layout_marginHorizontal="8dp"
                         android:fontFamily="@font/rubik_regular"
                         android:padding="4dp"
+                        android:gravity="end"
+                        android:lines="1"
+                        android:ellipsize="end"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="© Lorem ipsum" />
 
                     <TextView
                         android:id="@+id/tvApodTitleShimmer"
-                        android:layout_width="68dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="8dp"
-                        android:layout_marginVertical="16dp"
+                        android:layout_marginVertical="8dp"
                         android:fontFamily="@font/rubik_regular"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/tvCopyrightShimmer" />
+                        app:layout_constraintTop_toBottomOf="@+id/tvCopyrightShimmer"
+                        tools:text="Title:" />
 
                     <TextView
                         android:id="@+id/tvTitleShimmer"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="8dp"
-                        android:layout_marginVertical="16dp"
+                        android:layout_marginTop="8dp"
                         android:lines="1"
                         android:ellipsize="end"
                         android:fontFamily="@font/rubik_regular"
                         app:layout_constraintStart_toEndOf="@+id/tvApodTitleShimmer"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/tvCopyrightShimmer" />
+                        app:layout_constraintTop_toBottomOf="@+id/tvCopyrightShimmer"
+                        tools:text="Explanation: Asteroid 319 Leona cast a shadow across planet Earth on December 12, as it passed in front of bright star Betelgeuse. But to see everyone's favorite red giant star fade this time, you had to stand near the center line of the narrow shadow path starting in central Mexico and extending eastward across southern Florida, the Atlantic Ocean, southern Europe, and Eurasia. The geocentric celestial event was captured in these two panels taken at Almodovar del Rio, Spain from before (left) and during the asteroid-star occultation. In both panels Betelgeuse is seen above and left, at the shoulder of the familiar constellation Orion. Its brightness diminishes noticeably during the exceedingly rare occultation when, for several seconds, the giant star was briefly eclipsed by a roughly 60 kilometer diameter main-belt asteroid." />
 
                     <TextView
-                        android:id="@+id/tvExplanationTitleShimmer"
-                        android:layout_width="68dp"
+                        android:id="@+id/tvApodDateShimmer"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="8dp"
                         android:layout_marginVertical="8dp"
                         android:fontFamily="@font/rubik_regular"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/tvApodTitleShimmer" />
+                        app:layout_constraintTop_toBottomOf="@+id/tvApodTitleShimmer"
+                        tools:text="Date:" />
+
+                    <TextView
+                        android:id="@+id/tvDateShimmer"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="8dp"
+                        android:layout_marginVertical="8dp"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/rubik_regular"
+                        android:lines="1"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/tvApodDateShimmer"
+                        app:layout_constraintTop_toBottomOf="@+id/tvTitleShimmer"
+                        tools:text="28/12/2023" />
+
+                    <TextView
+                        android:id="@+id/tvExplanationTitleShimmer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="8dp"
+                        android:layout_marginVertical="8dp"
+                        android:fontFamily="@font/rubik_regular"
+                        tools:text="Explanation:"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tvApodDateShimmer" />
 
                     <TextView
                         android:id="@+id/tvExplanationShimmer"
@@ -250,19 +285,23 @@
                         android:fontFamily="@font/rubik_regular"
                         android:lines="2"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintBottom_toTopOf="@+id/tvSeeMoreShimmer"
                         app:layout_constraintStart_toEndOf="@+id/tvExplanationTitleShimmer"
-                        app:layout_constraintTop_toBottomOf="@+id/tvTitleShimmer"/>
+                        app:layout_constraintTop_toBottomOf="@+id/tvDateShimmer"
+                        tools:text="Explanation: Asteroid 319 Leona cast a shadow across planet Earth on December 12, as it passed in front of bright star Betelgeuse. But to see everyone's favorite red giant star fade this time, you had to stand near the center line of the narrow shadow path starting in central Mexico and extending eastward across southern Florida, the Atlantic Ocean, southern Europe, and Eurasia. The geocentric celestial event was captured in these two panels taken at Almodovar del Rio, Spain from before (left) and during the asteroid-star occultation. In both panels Betelgeuse is seen above and left, at the shoulder of the familiar constellation Orion. Its brightness diminishes noticeably during the exceedingly rare occultation when, for several seconds, the giant star was briefly eclipsed by a roughly 60 kilometer diameter main-belt asteroid." />
+
                     <TextView
                         android:id="@+id/tvSeeMoreShimmer"
-                        android:layout_width="68dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="8dp"
+                        android:layout_marginHorizontal="12dp"
                         android:layout_marginVertical="8dp"
                         android:fontFamily="@font/rubik_regular"
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent" />
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tvExplanationShimmer"
+                        app:layout_constraintVertical_bias="0.0"
+                        tools:text="@string/see_more" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>
