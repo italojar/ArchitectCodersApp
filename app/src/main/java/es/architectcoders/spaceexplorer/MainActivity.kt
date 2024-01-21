@@ -20,7 +20,6 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        Thread.sleep(1000)
         screenSplashNasa.setKeepOnScreenCondition { false }
 
         configureBottomNavigation()
