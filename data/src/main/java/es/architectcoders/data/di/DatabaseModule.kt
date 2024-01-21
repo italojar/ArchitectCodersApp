@@ -7,8 +7,8 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import es.architectcoders.data.source.local.database.AppDatabase
-import es.architectcoders.data.source.local.database.Dao
+import es.architectcoders.data.database.ApodDao
+import es.architectcoders.data.database.AppDatabase
 import javax.inject.Singleton
 
 @Module
@@ -27,5 +27,5 @@ object DatabaseModule {
 
     @Provides
     @Singleton
-    fun providedDao(appDatabase: AppDatabase): Dao = appDatabase.getDao()
+    fun providedDao(appDatabase: AppDatabase): ApodDao = appDatabase.getApodDao()
 }
