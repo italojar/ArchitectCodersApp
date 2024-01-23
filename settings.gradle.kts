@@ -17,3 +17,4 @@ rootProject.name = "SpaceExplorer"
 include(":app")
 include(":domain")
 include(":data")
+include(":usecases")

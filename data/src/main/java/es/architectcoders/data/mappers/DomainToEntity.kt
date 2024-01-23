@@ -1,9 +1,9 @@
 package es.architectcoders.data.mappers
 
 import es.architectcoders.data.database.entity.ApodEntity
-import es.architectcoders.data.source.local.model.ApodData
+import es.architectcoders.domain.model.Apod
 
-fun ApodData.toEntity() = ApodEntity(
+fun Apod.toEntity() = ApodEntity(
     id = id,
     copyright = copyright,
     date = date,

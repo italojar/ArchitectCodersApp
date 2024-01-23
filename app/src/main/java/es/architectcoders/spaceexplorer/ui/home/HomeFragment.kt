@@ -10,8 +10,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
+import es.architectcoders.domain.model.Error
 import es.architectcoders.spaceexplorer.R
-import es.architectcoders.spaceexplorer.common.Error
 import es.architectcoders.spaceexplorer.common.launchAndCollect
 import es.architectcoders.spaceexplorer.databinding.FragmentHomeBinding
 import kotlinx.coroutines.flow.distinctUntilChanged
