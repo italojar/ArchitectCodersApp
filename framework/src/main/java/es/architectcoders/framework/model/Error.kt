@@ -8,10 +8,10 @@ sealed interface Error {
     class Unknown(val message: String) : Error
 }
 
-fun Throwable.toError(): es.architectcoders.domain.model.Error {
+fun Throwable.toError(): Error {
     return when (this) {
-        is retrofit2.HttpException -> es.architectcoders.domain.model.Error.Server(code(), message())
-        is IOException -> es.architectcoders.domain.model.Error.Connectivity
-        else -> es.architectcoders.domain.model.Error.Unknown(message ?: "Unknown error")
+        is retrofit2.HttpException -> Error.Server(code(), message())
+        is IOException -> Error.Connectivity
+        else -> Error.Unknown(message ?: "Unknown error")
     }
 }
