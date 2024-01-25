@@ -1,10 +1,10 @@
 package es.architectcoders.data.source.local
 
 
-import es.architectcoders.data.database.ApodDao
+import es.architectcoders.framework.database.ApodDao
 import es.architectcoders.data.mappers.toDomain
 import es.architectcoders.data.mappers.toEntity
-import es.architectcoders.data.source.network.model.ApodResponse
+import es.architectcoders.framework.model.ApodResponse
 import es.architectcoders.domain.model.Apod
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map

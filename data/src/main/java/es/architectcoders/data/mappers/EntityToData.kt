@@ -1,7 +1,7 @@
 package es.architectcoders.data.mappers
 
-import es.architectcoders.data.database.entity.ApodEntity
 import es.architectcoders.domain.model.Apod
+import es.architectcoders.framework.database.entity.ApodEntity
 
 fun ApodEntity.toDomain() = Apod(
     id = this.id,

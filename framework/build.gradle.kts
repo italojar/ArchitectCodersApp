@@ -5,11 +5,13 @@ plugins {
     kotlin("kapt")
     id("com.google.dagger.hilt.android")
     id("dagger.hilt.android.plugin")
+    //secrets-gradle-plugin
+    id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
 }
 
 android {
-    namespace = "es.architectcoders.data"
-    compileSdk = 34
+    namespace = "es.architectcoders.framework"
+    compileSdk = 33
 
     defaultConfig {
         minSdk = 24
@@ -17,6 +19,15 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
 
+        kapt {
+            arguments {
+                arg("room.schemaLocation", "$projectDir/schemas")
+            }
+        }
+
+        buildFeatures {
+            buildConfig = true
+        }
     }
 
     buildTypes {
@@ -47,15 +58,25 @@ dependencies {
     // Hilt
     implementation("com.google.dagger:hilt-android:2.49")
     kapt("com.google.dagger:hilt-compiler:2.49")
+    // Retrofit
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     // Corrutinas
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
+    // Room
+    implementation("androidx.room:room-ktx:2.6.0")
+    implementation("androidx.room:room-runtime:2.6.0")
+    annotationProcessor("androidx.room:room-compiler:2.6.0")
+    // To use Kotlin annotation processing tool (kapt)
+    kapt("androidx.room:room-compiler:2.6.0")
+    // Maps
+    implementation("com.google.android.gms:play-services-maps:18.2.0")
     //Test
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
     implementation(project(mapOf("path" to ":domain")))
-    implementation(project(mapOf("path" to ":framework")))
 }
 
 // Allow references to generated code

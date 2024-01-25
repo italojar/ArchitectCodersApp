@@ -1,12 +1,12 @@
-package es.architectcoders.data.di
+package es.architectcoders.framework.di
 
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import es.architectcoders.data.BuildConfig
-import es.architectcoders.data.source.network.ApodApiClient
-import es.architectcoders.data.source.network.NasaInterceptor
+import es.architectcoders.framework.BuildConfig
+import es.architectcoders.framework.model.ApodApiClient
+import es.architectcoders.framework.model.NasaInterceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

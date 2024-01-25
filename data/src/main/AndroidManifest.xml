@@ -2,19 +2,4 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="es.architectcoders.data">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
-    <application>
-
-        <meta-data
-            android:name="es.architectcoders.data.NASA_API_KEY"
-            android:value="${NASA_API_KEY}" />
-
-        <meta-data
-            android:name="es.architectcoders.data.BASE_URL"
-            android:value="${BASE_URL}" />
-
-    </application>
-
 </manifest>

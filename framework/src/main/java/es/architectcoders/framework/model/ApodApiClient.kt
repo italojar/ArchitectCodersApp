@@ -1,6 +1,5 @@
-package es.architectcoders.data.source.network
+package es.architectcoders.framework.model
 
-import es.architectcoders.data.source.network.model.ApodResponse
 import retrofit2.Response
 import retrofit2.http.GET
 

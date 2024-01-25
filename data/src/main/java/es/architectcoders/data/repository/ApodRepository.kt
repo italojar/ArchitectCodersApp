@@ -2,10 +2,10 @@ package es.architectcoders.data.repository
 
 import es.architectcoders.data.source.local.ApodLocalDataSource
 import es.architectcoders.data.source.network.ApodRemoteDataSource
-import es.architectcoders.data.source.network.model.ApodResponse
-import es.architectcoders.data.source.network.model.toError
+import es.architectcoders.framework.model.toError
 import es.architectcoders.domain.model.Apod
 import es.architectcoders.domain.model.Error
+import es.architectcoders.framework.model.ApodResponse
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 

@@ -1,7 +1,7 @@
-package es.architectcoders.data.source.network
+package es.architectcoders.framework.model
 
 
-import es.architectcoders.data.BuildConfig
+import es.architectcoders.framework.BuildConfig
 import okhttp3.Interceptor
 import okhttp3.Response
 import javax.inject.Inject

@@ -1,4 +1,4 @@
-package es.architectcoders.data.di
+package es.architectcoders.framework.di
 
 import android.content.Context
 import androidx.room.Room
@@ -7,8 +7,8 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import es.architectcoders.data.database.ApodDao
-import es.architectcoders.data.database.AppDatabase
+import es.architectcoders.framework.database.ApodDao
+import es.architectcoders.framework.database.AppDatabase
 import javax.inject.Singleton
 
 @Module

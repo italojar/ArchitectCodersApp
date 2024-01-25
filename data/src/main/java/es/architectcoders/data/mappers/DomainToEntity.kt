@@ -1,6 +1,6 @@
 package es.architectcoders.data.mappers
 
-import es.architectcoders.data.database.entity.ApodEntity
+import es.architectcoders.framework.database.entity.ApodEntity
 import es.architectcoders.domain.model.Apod
 
 fun Apod.toEntity() = ApodEntity(

@@ -1,4 +1,4 @@
-package es.architectcoders.data.database.entity
+package es.architectcoders.framework.database.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

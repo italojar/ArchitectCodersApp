@@ -1,11 +1,11 @@
-package es.architectcoders.data.database
+package es.architectcoders.framework.database
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
-import es.architectcoders.data.database.entity.ApodEntity
+import es.architectcoders.framework.database.entity.ApodEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao

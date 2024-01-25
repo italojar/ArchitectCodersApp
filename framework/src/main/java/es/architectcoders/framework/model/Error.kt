@@ -1,4 +1,4 @@
-package es.architectcoders.data.source.network.model
+package es.architectcoders.framework.model
 
 import java.io.IOException
 

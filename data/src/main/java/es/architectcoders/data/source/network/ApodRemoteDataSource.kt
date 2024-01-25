@@ -1,7 +1,8 @@
 package es.architectcoders.data.source.network
 
 
-import es.architectcoders.data.source.network.model.ApodResponse
+import es.architectcoders.framework.model.ApodApiClient
+import es.architectcoders.framework.model.ApodResponse
 import javax.inject.Inject
 
 class ApodRemoteDataSource @Inject constructor(
