@@ -1,8 +1,8 @@
 package es.architectcoders.usecases
 
 import es.architectcoders.data.repository.ApodRepository
-import es.architectcoders.domain.model.Apod
-import es.architectcoders.domain.model.Error
+import es.architectcoders.domain.Apod
+import es.architectcoders.domain.Error
 import javax.inject.Inject
 
 class SaveApodFavoriteUseCase @Inject constructor(

@@ -5,9 +5,9 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import es.architectcoders.spaceexplorer.R
-import es.architectcoders.spaceexplorer.common.loadUrl
 import es.architectcoders.spaceexplorer.databinding.FragmentHomeBinding
-import es.architectcoders.spaceexplorer.model.ApodObject
+import es.architectcoders.spaceexplorer.ui.common.loadUrl
+import es.architectcoders.spaceexplorer.ui.model.ApodObject
 
 
 fun Fragment.buildHomeState(

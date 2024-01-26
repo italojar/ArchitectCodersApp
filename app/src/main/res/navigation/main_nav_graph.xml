@@ -40,6 +40,6 @@
         tools:layout="@layout/fragment_home_detail" >
         <argument
             android:name="apod"
-            app:argType="es.architectcoders.spaceexplorer.model.ApodObject" />
+            app:argType="es.architectcoders.spaceexplorer.ui.model.ApodObject" />
     </fragment>
 </navigation>

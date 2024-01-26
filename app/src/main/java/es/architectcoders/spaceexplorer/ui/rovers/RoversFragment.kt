@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import dagger.hilt.android.AndroidEntryPoint
 import es.architectcoders.spaceexplorer.databinding.FragmentRoversBinding
-import es.architectcoders.spaceexplorer.model.RoversObject
+import es.architectcoders.spaceexplorer.ui.model.RoversObject
 
 @AndroidEntryPoint
 class RoversFragment : Fragment() {

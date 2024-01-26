@@ -24,7 +24,7 @@
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-                <es.architectcoders.spaceexplorer.common.AspectRatioImageView
+                <es.architectcoders.spaceexplorer.ui.common.AspectRatioImageView
                     android:id="@+id/ivApodPhoto"
                     android:layout_width="match_parent"
                     android:layout_height="425dp"

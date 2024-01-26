@@ -1,40 +1,30 @@
 package es.architectcoders.data.repository
 
-import es.architectcoders.data.mappers.toDomain
-import es.architectcoders.data.source.local.ApodLocalDataSource
-import es.architectcoders.data.source.network.ApodRemoteDataSource
-import es.architectcoders.domain.model.Apod
-import es.architectcoders.domain.model.Error
-import es.architectcoders.framework.model.ApodResponse
-import es.architectcoders.framework.model.toError
-import kotlinx.coroutines.flow.Flow
+import es.architectcoders.data.datasource.ApodLocalDataSource
+import es.architectcoders.data.datasource.ApodRemoteDataSource
+import es.architectcoders.domain.Apod
+import es.architectcoders.domain.Error
 import javax.inject.Inject
 
 class ApodRepository @Inject constructor(
     private val apodLocalDataSource: ApodLocalDataSource,
     private val apodRemoteDataSource: ApodRemoteDataSource
 ) {
-    suspend fun requestApod(): Error? = try {
-        val apod: ApodResponse? = apodRemoteDataSource.getApod()
-        if (apod != null) {
-            val apodExist = apodLocalDataSource.apodExists(apod)
+    val allApods get() = apodLocalDataSource.getApods
+    suspend fun requestApod(): Error? {
+        val apod = apodRemoteDataSource.getApod()
+        apod.fold(
+            ifLeft = { error -> return error },
+            ifRight = { apodResponse ->
+            val apodExist = apodLocalDataSource.apodExists(apodResponse)
             if (!apodExist)  {
-                apodLocalDataSource.saveApod(apod)
+                apodLocalDataSource.saveApod(apodResponse)
             }
-        }
-        null // return null if no error
-    } catch (exception: Exception) {
-        exception.toError().toDomain()
+        })
+        return null
     }
 
-    fun getApods(): Flow<List<Apod>> {
-        return apodLocalDataSource.getApods()
-    }
-
-    suspend fun saveApodAsFavourite(apod: Apod): Error? = try {
-        apodLocalDataSource.saveApodAsFavourite(apod)
-        null // return null if no error
-    } catch (exception: Exception) {
-        exception.toError().toDomain()
+    suspend fun saveApodAsFavourite(apod: Apod): Error? {
+        return apodLocalDataSource.saveApodAsFavourite(apod)
     }
 }

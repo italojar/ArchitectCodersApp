@@ -5,10 +5,10 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.LinearLayout
 import androidx.recyclerview.widget.RecyclerView
-import es.architectcoders.spaceexplorer.common.loadUrl
-import es.architectcoders.spaceexplorer.common.toggleVisibilityWithAnimation
+import es.architectcoders.spaceexplorer.ui.common.loadUrl
+import es.architectcoders.spaceexplorer.ui.common.toggleVisibilityWithAnimation
 import es.architectcoders.spaceexplorer.databinding.RoversItemBinding
-import es.architectcoders.spaceexplorer.model.RoversObject
+import es.architectcoders.spaceexplorer.ui.model.RoversObject
 
 class RoversAdapter(private val listRovers: List<RoversObject>) :
     RecyclerView.Adapter<RoversAdapter.ViewHolder>() {

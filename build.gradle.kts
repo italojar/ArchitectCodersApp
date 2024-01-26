@@ -19,4 +19,5 @@ plugins {
     id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin") version "2.0.1" apply false
     //navigation-safe-args
     id("androidx.navigation.safeargs") version "2.5.3" apply false
+    id("org.jetbrains.kotlin.jvm") version "1.9.0" apply false
 }

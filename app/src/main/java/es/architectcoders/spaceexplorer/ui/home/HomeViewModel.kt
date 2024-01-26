@@ -3,11 +3,10 @@ package es.architectcoders.spaceexplorer.ui.home
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import es.architectcoders.domain.model.Error
-import es.architectcoders.domain.model.toError
-import es.architectcoders.spaceexplorer.common.toDomain
-import es.architectcoders.spaceexplorer.common.toViewObject
-import es.architectcoders.spaceexplorer.model.ApodObject
+import es.architectcoders.domain.Error
+import es.architectcoders.spaceexplorer.ui.common.toDomain
+import es.architectcoders.spaceexplorer.ui.common.toViewObject
+import es.architectcoders.spaceexplorer.ui.model.ApodObject
 import es.architectcoders.usecases.GetApodsUseCase
 import es.architectcoders.usecases.RequestApodUseCase
 import es.architectcoders.usecases.SaveApodFavoriteUseCase
@@ -40,7 +39,7 @@ class HomeViewModel @Inject constructor(
     init {
         viewModelScope.launch {
             _state.value = _state.value.copy(loading = true)
-            val error: Error? = requestApodUseCase()?.toError()
+            val error: Error? = requestApodUseCase()
             _state.update { uiState -> uiState.copy(loading = false, error = error) }
             getApodsUseCase().collect { apodList ->
                 _state.value = _state.value.copy(error = null, apodList = apodList.map { apod -> apod.toViewObject() })
@@ -54,7 +53,7 @@ class HomeViewModel @Inject constructor(
 
     fun saveApodAsFavourite(apod: ApodObject) {
         viewModelScope.launch {
-            val error: Error? = saveApodFavoriteUseCase(apod.toDomain())?.toError()
+            val error: Error? = saveApodFavoriteUseCase(apod.toDomain())
             _state.value = _state.value.copy(error = error)
         }
     }
@@ -71,7 +70,7 @@ class HomeViewModel @Inject constructor(
         viewModelScope.launch {
             _state.value = _state.value.copy(error = null, loading = true)
             _state.update { uiState ->
-                uiState.copy(loading = false, error = requestApodUseCase()?.toError())
+                uiState.copy(loading = false, error = requestApodUseCase())
             }
         }
     }

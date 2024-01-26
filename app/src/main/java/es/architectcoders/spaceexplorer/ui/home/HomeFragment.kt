@@ -10,10 +10,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
-import es.architectcoders.domain.model.Error
 import es.architectcoders.spaceexplorer.R
-import es.architectcoders.spaceexplorer.common.launchAndCollect
 import es.architectcoders.spaceexplorer.databinding.FragmentHomeBinding
+import es.architectcoders.spaceexplorer.ui.common.launchAndCollect
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
 
@@ -97,9 +96,9 @@ class HomeFragment : Fragment() {
                 .collect { error ->
                     if (error != null) {
                         when (error) {
-                            is Error.Server -> showErrorDialog(getString(R.string.server_error))
-                            is Error.Connectivity -> showErrorDialog(getString(R.string.connectivity_error))
-                            is Error.Unknown -> showErrorDialog(getString(R.string.unknown_error))
+                            is es.architectcoders.domain.Error.Server -> showErrorDialog(getString(R.string.server_error))
+                            is es.architectcoders.domain.Error.Connectivity -> showErrorDialog(getString(R.string.connectivity_error))
+                            is es.architectcoders.domain.Error.Unknown -> showErrorDialog(getString(R.string.unknown_error))
                         }
                     }
                 }
