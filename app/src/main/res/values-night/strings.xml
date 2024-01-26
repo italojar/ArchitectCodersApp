@@ -5,4 +5,13 @@
     <string name="rovers">Rovers</string>
     <string name="mars">Mars</string>
     <string name="favourite">Favourite</string>
+    <string name="see_more"><u>See more</u></string>
+    <string name="copyright">© %1$s</string>
+    <!-- error messages -->
+    <string name="server_error">The data could not be obtained.</string>
+    <string name="connectivity_error">Check your connection, please.</string>
+    <string name="unknown_error">An unexpected error has occurred.</string>
+    <string name="dialog_title_error">An error has occurred</string>
+    <string name="dialog_cancel">Cancel</string>
+    <string name="dialog_retry">Try again</string>
 </resources>
