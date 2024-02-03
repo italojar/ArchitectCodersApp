@@ -8,9 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import es.architectcoders.spaceexplorer.ui.common.loadUrl
 import es.architectcoders.spaceexplorer.ui.common.toggleVisibilityWithAnimation
 import es.architectcoders.spaceexplorer.databinding.RoversItemBinding
-import es.architectcoders.spaceexplorer.ui.model.RoversObject
+import es.architectcoders.spaceexplorer.ui.model.PhotoObject
 
-class RoversAdapter(private val listRovers: List<RoversObject>) :
+class RoversAdapter(private val listRovers: List<PhotoObject>) :
     RecyclerView.Adapter<RoversAdapter.ViewHolder>() {
 
     private lateinit var binding: RoversItemBinding

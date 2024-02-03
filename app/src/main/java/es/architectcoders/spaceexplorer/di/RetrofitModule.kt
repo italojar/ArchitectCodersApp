@@ -7,6 +7,7 @@ import dagger.hilt.components.SingletonComponent
 import es.architectcoders.spaceexplorer.BuildConfig
 import es.architectcoders.spaceexplorer.framework.server.ApodApiClient
 import es.architectcoders.spaceexplorer.framework.server.NasaInterceptor
+import es.architectcoders.spaceexplorer.framework.server.RoversApiClient
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -30,6 +31,12 @@ object  RetrofitModule {
     @Singleton
     fun provideApodApiClient(retrofit: Retrofit): ApodApiClient {
         return retrofit.create(ApodApiClient::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideRoversApiClient(retrofit: Retrofit): RoversApiClient {
+        return retrofit.create(RoversApiClient::class.java)
     }
 
     @Provides

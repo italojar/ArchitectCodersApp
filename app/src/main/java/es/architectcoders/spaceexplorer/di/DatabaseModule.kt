@@ -9,6 +9,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import es.architectcoders.spaceexplorer.framework.database.ApodDao
 import es.architectcoders.spaceexplorer.framework.database.AppDatabase
+import es.architectcoders.spaceexplorer.framework.database.RoversDao
 import javax.inject.Singleton
 
 @Module
@@ -28,4 +29,8 @@ object DatabaseModule {
     @Provides
     @Singleton
     fun providedDao(appDatabase: AppDatabase): ApodDao = appDatabase.getApodDao()
+
+    @Provides
+    @Singleton
+    fun provideDao(appDatabase: AppDatabase): RoversDao = appDatabase.getRoversDao()
 }
