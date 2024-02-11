@@ -1,4 +1,4 @@
-package es.architectcoders.spaceexplorer.framework.database
+package es.architectcoders.spaceexplorer.framework.database.roverDb
 
 import es.architectcoders.data.datasource.RoversLocalDataSource
 import es.architectcoders.domain.Photo
@@ -34,7 +34,7 @@ class RoversRoomDataSource @Inject constructor(
 
 }
 
-private fun List<PhotoEntity>.toDomain() : List<Photo> = map { it.toDomain() }
+fun List<PhotoEntity>.toDomain() : List<Photo> = map { it.toDomain() }
 
 
 

@@ -1,4 +1,4 @@
-package es.architectcoders.spaceexplorer.framework.database
+package es.architectcoders.spaceexplorer.framework.database.apodDb
 
 import androidx.room.Dao
 import androidx.room.Insert

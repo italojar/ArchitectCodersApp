@@ -1,4 +1,4 @@
-package es.architectcoders.spaceexplorer.framework.server
+package es.architectcoders.spaceexplorer.framework.server.apodServer
 
 import com.google.gson.annotations.SerializedName
 
