@@ -5,6 +5,11 @@
     xmlns:tools="http://schemas.android.com/tools">
     <data>
 
+        <import type="es.architectcoders.spaceexplorer.ui.model.PhotoObject"/>
+
+        <variable
+            name="photoObject"
+            type="es.architectcoders.spaceexplorer.ui.model.PhotoObject" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
@@ -28,6 +33,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
                 android:scaleType="centerCrop"
+                android:src="@{photoObject.imgSrc}"
                 tools:src="@drawable/ic_nasa_logo"
                 android:contentDescription="@null"/>
 
@@ -68,7 +74,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="4dp"
-                android:text=""
+                android:text="@{photoObject.sol}"
                 android:fontFamily="@font/rubik_regular"
                 tools:text="Sol 1000"/>
             <TextView
@@ -78,7 +84,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="4dp"
                 android:layout_marginBottom="4dp"
-                android:text=""
+                android:text="@{photoObject.camera.toString()}"
                 android:fontFamily="@font/rubik_regular"
                 tools:text="Camara navigation"/>
             <TextView
@@ -88,7 +94,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="4dp"
                 android:layout_marginBottom="8dp"
-                android:text=""
+                android:text="@{photoObject.earthDate}"
                 android:fontFamily="@font/rubik_regular"
                 tools:text="Earth date: 2022-01-01"/>
         </LinearLayout>
