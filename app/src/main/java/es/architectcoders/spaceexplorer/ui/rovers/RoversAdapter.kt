@@ -1,43 +1,38 @@
 package es.architectcoders.spaceexplorer.ui.rovers
 
-import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
-import android.widget.LinearLayout
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import es.architectcoders.spaceexplorer.ui.common.loadUrl
-import es.architectcoders.spaceexplorer.ui.common.toggleVisibilityWithAnimation
+import es.architectcoders.spaceexplorer.R
 import es.architectcoders.spaceexplorer.databinding.RoversItemBinding
+import es.architectcoders.spaceexplorer.ui.common.basicDiffUtil
+import es.architectcoders.spaceexplorer.ui.common.inflate
 import es.architectcoders.spaceexplorer.ui.model.PhotoObject
 
-class RoversAdapter(private val listRovers: List<PhotoObject>) :
-    RecyclerView.Adapter<RoversAdapter.ViewHolder>() {
+class RoversAdapter(private val listener: (PhotoObject) -> Unit) :
+    ListAdapter<PhotoObject, RoversAdapter.ViewHolder>(basicDiffUtil { old, new -> old.id == new.id }) {
 
-    private lateinit var binding: RoversItemBinding
-    override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
-        binding = RoversItemBinding.inflate(LayoutInflater.from(viewGroup.context), viewGroup, false)
-        return ViewHolder(binding)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val view = parent.inflate(R.layout.rovers_item, false)
+        return ViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = listRovers[position]
-        val llData: LinearLayout = holder.view.llData
-        val ibExpand: ImageButton = holder.view.ibExpand
-
-        with(holder.view) {
-            ivRoverPhoto.loadUrl(item.photo)
-            tvSol.text = item.sol.toString()
-            tvCamara.text = item.camera
-            tvEarthDate.text = item.earth_date
-        }
-
-        ibExpand.setOnClickListener {
-            llData.toggleVisibilityWithAnimation(ibExpand)
+        val photoObject = getItem(position)
+        holder.bind(photoObject)
+        holder.itemView.setOnClickListener {
+            listener(photoObject)
         }
     }
 
-    override fun getItemCount(): Int = listRovers.size
+    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        private val binding = RoversItemBinding.bind(view)
 
-    class ViewHolder(var view: RoversItemBinding) : RecyclerView.ViewHolder(view.root)
+        fun bind(photoObject: PhotoObject) {
+            binding.photoObject = photoObject
+        }
+    }
+
 
 }

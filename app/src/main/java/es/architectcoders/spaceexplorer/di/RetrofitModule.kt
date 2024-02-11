@@ -5,9 +5,9 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import es.architectcoders.spaceexplorer.BuildConfig
-import es.architectcoders.spaceexplorer.framework.server.ApodApiClient
+import es.architectcoders.spaceexplorer.framework.server.apodServer.ApodApiClient
 import es.architectcoders.spaceexplorer.framework.server.NasaInterceptor
-import es.architectcoders.spaceexplorer.framework.server.RoversApiClient
+import es.architectcoders.spaceexplorer.framework.server.roverServer.RoversApiClient
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

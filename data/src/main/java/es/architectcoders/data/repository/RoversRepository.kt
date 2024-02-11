@@ -12,8 +12,8 @@ private val roversRemoteDataSource: RoversRemoteDataSource){
 
     val allRovers get() = roversLocalDataSource.getPhoto
 
-    suspend fun requestRovers(date: String): Error? {
-        val rovers = roversRemoteDataSource.getRovers(date)
+    suspend fun requestRovers(date: String, camera: String, page: Int, apiKey: String): Error? {
+        val rovers = roversRemoteDataSource.getRovers(date, camera, page, apiKey)
         rovers.fold(
             ifLeft = { error -> return error },
             ifRight = { roversResponse ->

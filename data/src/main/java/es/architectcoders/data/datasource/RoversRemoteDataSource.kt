@@ -6,5 +6,6 @@ import es.architectcoders.domain.Error
 
 interface RoversRemoteDataSource {
 
-    suspend fun getRovers(date: String): Either<Error, List<Photo>?>
+    suspend fun getRovers(date: String, camera: String, page: Int, apiKey: String):
+            Either<Error, List<Photo>?>
 }
