@@ -7,9 +7,9 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import es.architectcoders.spaceexplorer.framework.database.ApodDao
+import es.architectcoders.spaceexplorer.framework.database.apodDb.ApodDao
 import es.architectcoders.spaceexplorer.framework.database.AppDatabase
-import es.architectcoders.spaceexplorer.framework.database.RoversDao
+import es.architectcoders.spaceexplorer.framework.database.roverDb.RoversDao
 import javax.inject.Singleton
 
 @Module

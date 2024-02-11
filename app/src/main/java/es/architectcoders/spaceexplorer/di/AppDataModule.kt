@@ -8,10 +8,10 @@ import es.architectcoders.data.datasource.ApodLocalDataSource
 import es.architectcoders.data.datasource.ApodRemoteDataSource
 import es.architectcoders.data.datasource.RoversLocalDataSource
 import es.architectcoders.data.datasource.RoversRemoteDataSource
-import es.architectcoders.spaceexplorer.framework.database.ApodRoomDataSource
-import es.architectcoders.spaceexplorer.framework.database.RoversRoomDataSource
-import es.architectcoders.spaceexplorer.framework.server.ApodServerDataSource
-import es.architectcoders.spaceexplorer.framework.server.RoversServerDataSource
+import es.architectcoders.spaceexplorer.framework.database.apodDb.ApodRoomDataSource
+import es.architectcoders.spaceexplorer.framework.database.roverDb.RoversRoomDataSource
+import es.architectcoders.spaceexplorer.framework.server.apodServer.ApodServerDataSource
+import es.architectcoders.spaceexplorer.framework.server.roverServer.RoversServerDataSource
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -24,8 +24,8 @@ abstract class AppDataModule {
     abstract fun bindRemoteDataSource(remoteDataSource: ApodServerDataSource): ApodRemoteDataSource
 
     @Binds
-    abstract fun bindRemoteDataSource(remoteDataSource: RoversServerDataSource): RoversRemoteDataSource
+    abstract fun bindRemoteDataSourceRovers(remoteDataSource: RoversServerDataSource): RoversRemoteDataSource
 
     @Binds
-    abstract fun bindLocalDataSource(localDataSource: RoversRoomDataSource): RoversLocalDataSource
+    abstract fun bindLocalDataSourceRovers(localDataSource: RoversRoomDataSource): RoversLocalDataSource
 }
