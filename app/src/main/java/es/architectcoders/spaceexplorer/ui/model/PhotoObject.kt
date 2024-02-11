@@ -2,8 +2,8 @@ package es.architectcoders.spaceexplorer.ui.model
 
 import kotlinx.parcelize.Parcelize
 import android.os.Parcelable
-import es.architectcoders.spaceexplorer.framework.server.CameraResponse
-import es.architectcoders.spaceexplorer.framework.server.RoverResponse
+import es.architectcoders.spaceexplorer.framework.server.roverServer.CameraResponse
+import es.architectcoders.spaceexplorer.framework.server.roverServer.RoverResponse
 import kotlinx.parcelize.RawValue
 
 @Parcelize
