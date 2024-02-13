@@ -1,10 +1,12 @@
 package es.architectcoders.spaceexplorer.di
 
+import android.app.Application
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import es.architectcoders.spaceexplorer.BuildConfig
+import es.architectcoders.spaceexplorer.R
 import es.architectcoders.spaceexplorer.framework.server.apodServer.ApodApiClient
 import es.architectcoders.spaceexplorer.framework.server.NasaInterceptor
 import es.architectcoders.spaceexplorer.framework.server.roverServer.RoversApiClient
@@ -44,4 +46,9 @@ object  RetrofitModule {
     fun provideClient(interceptor: NasaInterceptor): OkHttpClient {
         return OkHttpClient.Builder().addInterceptor(interceptor).build()
     }
+
+    @Provides
+    @Singleton
+    @ApiKey
+    fun provideApiKey(app: Application): String = app.getString(R.string.api_key)
 }
