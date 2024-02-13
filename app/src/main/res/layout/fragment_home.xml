@@ -36,7 +36,7 @@
                     android:id="@+id/ivApodFav"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
-                    android:src="@drawable/ic_bottom_nav_favorite"
+                    android:src="@drawable/ic_favorite_empty"
                     android:background="@android:color/transparent"
                     android:layout_gravity="end"
                     android:clickable="true"

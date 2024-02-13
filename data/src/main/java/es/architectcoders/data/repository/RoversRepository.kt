@@ -12,17 +12,19 @@ private val roversRemoteDataSource: RoversRemoteDataSource){
 
     val allRovers get() = roversLocalDataSource.getPhoto
 
-    suspend fun requestRovers(date: String, camera: String, page: Int, apiKey: String): Error? {
-        val rovers = roversRemoteDataSource.getRovers(date, camera, page, apiKey)
-        rovers.fold(
-            ifLeft = { error -> return error },
-            ifRight = { roversResponse ->
-                roversResponse?.let { roversLocalDataSource.saveRovers(it) }
-            })
+    suspend fun requestRovers(): Error? {
+        if (roversLocalDataSource.isRoversEmpty()){
+            val rovers = roversRemoteDataSource.getRovers()
+            rovers.fold(ifLeft = { return it }) {
+                     roversLocalDataSource.saveRovers(it)
+
+            }
+        }
         return null
     }
 
     suspend fun saveRoversAsFavourite(photo: Photo): Error? {
-        return roversLocalDataSource.saveRoversAsFavourite(photo)
+        val updatePhoto = photo.copy(favorite = !photo.favorite)
+        return roversLocalDataSource.saveRovers(listOf(updatePhoto))
     }
 }

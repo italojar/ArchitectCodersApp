@@ -12,5 +12,5 @@ interface RoversLocalDataSource {
 
     suspend fun isRoversEmpty(): Boolean
 
-    suspend fun saveRoversAsFavourite(photo: Photo): Error?
+//    suspend fun saveRoversAsFavourite(photos: List<Photo>): Error?
 }

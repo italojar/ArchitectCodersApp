@@ -14,7 +14,8 @@ class RoversRoomDataSource @Inject constructor(
     private val roversDao: RoversDao
 ) : RoversLocalDataSource {
 
-    override val getPhoto: Flow<List<Photo>> = roversDao.getAllRovers().map { it.toDomain() }
+    override val getPhoto: Flow<List<Photo>> = roversDao.getAllRovers().map {
+        it.toDomain() }
 
     override suspend fun saveRovers(rovers: List<Photo>): Error? = try {
         rovers.toEntity().let { roversEntity -> roversDao.insertRovers(roversEntity) }
@@ -25,12 +26,12 @@ class RoversRoomDataSource @Inject constructor(
 
     override suspend fun isRoversEmpty(): Boolean = roversDao.roversCount() == 0
 
-    override suspend fun saveRoversAsFavourite(photo: Photo): Error? = try {
-        photo.toEntity().let { roversEntity -> roversDao.updateRovers(roversEntity) }
-        null
-    } catch (e: Exception) {
-        e.toError()
-    }
+//    override suspend fun saveRoversAsFavourite(photo: Photo): Error? = try {
+//        photo.toEntity().let { roversEntity -> roversDao.updateRovers(roversEntity) }
+//        null
+//    } catch (e: Exception) {
+//        e.toError()
+//    }
 
 }
 
