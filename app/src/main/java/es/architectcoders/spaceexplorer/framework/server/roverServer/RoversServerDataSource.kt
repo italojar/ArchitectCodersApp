@@ -7,28 +7,38 @@ import es.architectcoders.domain.CameraX
 import es.architectcoders.domain.Error
 import es.architectcoders.domain.Photo
 import es.architectcoders.domain.Rover
-import es.architectcoders.spaceexplorer.framework.toDomain
+import es.architectcoders.spaceexplorer.di.ApiKey
 import es.architectcoders.spaceexplorer.framework.tryCall
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Locale
 import javax.inject.Inject
 
-class RoversServerDataSource @Inject constructor(
-    private val apiClient: RoversApiClient
-) : RoversRemoteDataSource {
-    override suspend fun getRovers(date: String, camera: String, page: Int, apiKey: String):
-            Either<Error, List<Photo>?> = tryCall {
-        apiClient.getRovers(date, camera, page, apiKey).body()?.photos?.toDomain()
+class RoversServerDataSource @Inject constructor(@ApiKey private val apiKey: String) :
+    RoversRemoteDataSource {
+//    override suspend fun getRovers(date: String, camera: String, page: Int, apiKey: String):
+//            Either<Error, List<Photo>?> = tryCall {
+//        apiClient.getRovers(date,apiKey)
+//            .body()?.photos?.toDomain()
+//    }
+
+    override suspend fun getRovers(date: Calendar): Either<Error, List<Photo>> = tryCall {
+        RemoteConnection.service
+            .getRovers(SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(date.time), apiKey)
+            .photos
+            .toDomain()
     }
 
     private fun List<PhotoResponse>.toDomain() : List<Photo> = map { it.toDomain() }
 
     private fun PhotoResponse.toDomain() : Photo =
         Photo(
-            camera.toDomain(),
+//            camera.toDomain(),
             earthDate,
             id,
-            imgSrc,
-            rover.toDomain(),
-            sol,
+            imgSrc.replace("http://", "https://"),
+//            rover.toDomain(),
+            sol.toString(),
             false
         )
 
@@ -51,7 +61,6 @@ class RoversServerDataSource @Inject constructor(
             name,
             status,
             totalPhotos
-
         )
 
     private fun CameraXResponse.toDomain(): CameraX =
