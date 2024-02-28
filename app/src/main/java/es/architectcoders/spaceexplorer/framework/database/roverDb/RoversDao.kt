@@ -14,16 +14,16 @@ interface RoversDao {
     @Query("SELECT * FROM PhotoEntity")
     fun getAllRovers(): Flow<List<PhotoEntity>>
 
-    @Query("SELECT * FROM PhotoEntity WHERE id = :id")
-    suspend fun findRoverById(id: Int): PhotoEntity
+//    @Query("SELECT * FROM PhotoEntity WHERE id = :id")
+//    suspend fun findRoverById(id: Int): PhotoEntity
 
     @Query("SELECT COUNT(id) FROM PhotoEntity")
     suspend fun roversCount(): Int
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertRovers(photoEntity: List<PhotoEntity>)
+    suspend fun insertRovers(rovers: List<PhotoEntity>)
 
-    @Update(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun updateRovers(photoEntity: PhotoEntity)
+//    @Update(onConflict = OnConflictStrategy.REPLACE)
+//    suspend fun updateRovers(photoEntity: PhotoEntity)
 
 }
