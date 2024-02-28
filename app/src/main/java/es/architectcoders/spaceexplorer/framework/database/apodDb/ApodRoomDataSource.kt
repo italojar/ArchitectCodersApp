@@ -1,4 +1,4 @@
-package es.architectcoders.spaceexplorer.framework.database
+package es.architectcoders.spaceexplorer.framework.database.apodDb
 
 import es.architectcoders.data.datasource.ApodLocalDataSource
 import es.architectcoders.domain.Apod

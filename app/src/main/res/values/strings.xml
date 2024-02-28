@@ -6,6 +6,8 @@
     <string name="favourite">Favourite</string>
     <string name="see_more"><u>See more</u></string>
     <string name="copyright">© %1$s</string>
+    <string name="earth_date">Earth date: %s</string>
+    <string name="sol">Sol: %s</string>
     <!-- error messages -->
     <string name="server_error">The data could not be obtained.</string>
     <string name="connectivity_error">Please, check your connection.</string>

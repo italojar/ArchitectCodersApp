@@ -1,5 +1,6 @@
-package es.architectcoders.spaceexplorer.framework.server
+package es.architectcoders.spaceexplorer.framework.server.apodServer
 
+import android.util.Log
 import arrow.core.Either
 import arrow.core.left
 import arrow.core.right
@@ -16,6 +17,7 @@ class ApodServerDataSource @Inject constructor(
     override suspend fun getApod(): Either<Error, Apod?> = try {
         apiClient.getApod().body()?.toDomain().right()
     } catch (e: Exception) {
+        Log.e("RoversViewModel", e.stackTraceToString())
         e.toError().left()
     }
 }

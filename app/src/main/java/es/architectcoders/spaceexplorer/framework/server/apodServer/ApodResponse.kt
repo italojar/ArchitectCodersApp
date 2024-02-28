@@ -1,10 +1,10 @@
-package es.architectcoders.spaceexplorer.framework.server
+package es.architectcoders.spaceexplorer.framework.server.apodServer
 
 import com.google.gson.annotations.SerializedName
 
 data class ApodResponse(
     val id: Int,
-    val copyright: String,
+    val copyright: String? = null,
     val date: String,
     val explanation: String,
     val hdurl: String,

@@ -38,7 +38,7 @@ class HomeState(
         if (apod.favorite) {
             binding.ivApodFav.setImageResource(R.drawable.ic_favorite_fill)
         } else {
-            binding.ivApodFav.setImageResource(R.drawable.ic_bottom_nav_favorite)
+            binding.ivApodFav.setImageResource(R.drawable.ic_favorite_empty)
         }
         if (apod.copyright.isNotEmpty()) {
             binding.tvCopyright.text = fragment.getString(R.string.copyright, apod.copyright)
