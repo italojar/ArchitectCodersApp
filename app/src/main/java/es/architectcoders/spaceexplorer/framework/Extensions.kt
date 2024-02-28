@@ -39,7 +39,7 @@ fun ApodEntity.toDomain() = Apod(
 )
 
 fun ApodResponse.toEntity() = ApodEntity(
-    copyright = this.copyright,
+    copyright = this.copyright ?: "",
     date = this.date,
     explanation = this.explanation,
     hdurl = this.hdurl,
@@ -52,7 +52,7 @@ fun ApodResponse.toEntity() = ApodEntity(
 
 fun ApodResponse.toDomain() = Apod(
     id = this.id,
-    copyright = this.copyright,
+    copyright = this.copyright ?: "",
     date = this.date,
     explanation = this.explanation,
     hdurl = this.hdurl,
@@ -63,34 +63,34 @@ fun ApodResponse.toDomain() = Apod(
     favorite = false
 )
 
-fun List<Photo>.toEntity() : List<PhotoEntity> {
-    return this.map {
-        it.toEntity()
-    }
-}
-
-/**
- * Map from Photo DOMAIN to Photo Database
- */
-fun Photo.toEntity() = PhotoEntity(
-    camera = this.camera,
-    earthDate = this.earthDate,
-    id = this.id,
-    imgSrc = this.imgSrc,
-    rover = this.rover,
-    sol = this.sol,
-    favorite = this.favorite
-)
-
-fun PhotoEntity.toDomain() = Photo(
-    camera = this.camera,
-    earthDate = this.earthDate,
-    id = this.id,
-    imgSrc = this.imgSrc,
-    rover = this.rover,
-    sol = this.sol,
-    favorite = this.favorite
-)
+//fun List<Photo>.toEntity() : List<PhotoEntity> {
+//    return this.map {
+//        it.toEntity()
+//    }
+//}
+//
+///**
+// * Map from Photo DOMAIN to Photo Database
+// */
+//fun Photo.toEntity() = PhotoEntity(
+//    camera = this.camera,
+//    earthDate = this.earthDate,
+//    id = this.id,
+//    imgSrc = this.imgSrc,
+//    rover = this.rover,
+//    sol = this.sol,
+//    favorite = this.favorite
+//)
+//
+//fun PhotoEntity.toDomain() = Photo(
+//    camera = this.camera,
+//    earthDate = this.earthDate,
+//    id = this.id,
+//    imgSrc = this.imgSrc,
+//    rover = this.rover,
+//    sol = this.sol,
+//    favorite = this.favorite
+//)
 
 
 
