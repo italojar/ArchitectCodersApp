@@ -75,7 +75,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="4dp"
                 android:layout_marginBottom="4dp"
-                android:text="@{photo.sol}"
+                android:text="@{@string/sol(photo.sol)}"
                 android:fontFamily="@font/rubik_regular"
                 tools:text="Camara navigation"/>
             <TextView
@@ -85,7 +85,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="4dp"
                 android:layout_marginBottom="8dp"
-                android:text="@{photo.earthDate}"
+                android:text="@{@string/earth_date(photo.earthDate)}"
                 android:fontFamily="@font/rubik_regular"
                 tools:text="Earth date: 2022-01-01"/>
         </LinearLayout>
