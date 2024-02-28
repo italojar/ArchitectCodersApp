@@ -1,7 +1,6 @@
 package es.architectcoders.domain
 
 data class Rover(
-    // Todo: Estudiar como sustituir CameraX por atributos primitivos
     val cameras: List<CameraX>,
     val id: Int,
     val landingDate: String,

@@ -5,14 +5,18 @@ import es.architectcoders.domain.Camera
 
 class CameraConverter {
     @TypeConverter
-    fun fromCamera(camera: Camera): String = camera.name
+    fun fromCamera(camera: Camera): String {
+        return "${camera.fullName},${camera.id},${camera.name},${camera.roverId}"
+    }
 
     @TypeConverter
-    fun toCamera(value: String): Camera =
-        Camera(
-            name = value,
-            id = 0,
-            fullName = "",
-            roverId = 0
+    fun toCamera(cameraString: String): Camera {
+        val parts = cameraString.split(",")
+        return Camera(
+            parts[0],
+            parts[1].toInt(),
+            parts[2],
+            parts[3].toInt()
         )
+    }
 }

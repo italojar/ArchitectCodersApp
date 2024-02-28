@@ -1,41 +1,60 @@
 package es.architectcoders.spaceexplorer.framework.database.roverDb
 
 import es.architectcoders.data.datasource.RoversLocalDataSource
-import es.architectcoders.domain.Photo
-import es.architectcoders.spaceexplorer.framework.toDomain
 import es.architectcoders.domain.Error
-import es.architectcoders.spaceexplorer.framework.toEntity
-import es.architectcoders.spaceexplorer.framework.toError
+import es.architectcoders.domain.Photo
+import es.architectcoders.spaceexplorer.framework.tryCall
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
+import es.architectcoders.spaceexplorer.framework.database.roverDb.PhotoEntity as DbPhoto
 
 class RoversRoomDataSource @Inject constructor(
     private val roversDao: RoversDao
 ) : RoversLocalDataSource {
 
     override val getPhoto: Flow<List<Photo>> = roversDao.getAllRovers().map {
-        it.toDomain() }
-
-    override suspend fun saveRovers(rovers: List<Photo>): Error? = try {
-        rovers.toEntity().let { roversEntity -> roversDao.insertRovers(roversEntity) }
-        null
-    } catch (e: Exception) {
-        e.toError()
+        it.toDomain()
     }
 
-    override suspend fun isRoversEmpty(): Boolean = roversDao.roversCount() == 0
-
-//    override suspend fun saveRoversAsFavourite(photo: Photo): Error? = try {
-//        photo.toEntity().let { roversEntity -> roversDao.updateRovers(roversEntity) }
-//        null
-//    } catch (e: Exception) {
-//        e.toError()
+//    override val getFavoritePhoto: Flow<List<Photo>> = roversDao.getAllRovers().map { listaPhotos ->
+//        listaPhotos.filter { elementoDelistaPhotos-> elementoDelistaPhotos.favorite }.toDomain()
 //    }
 
+    override suspend fun saveRovers(rovers: List<Photo>): Error? = tryCall {
+        roversDao.insertRovers(rovers.fromDomain())
+    }.fold(
+        ifLeft = { it },
+        ifRight = { null }
+    )
+
+    override suspend fun isRoversEmpty(): Boolean = roversDao.roversCount() == 0
 }
 
-fun List<PhotoEntity>.toDomain() : List<Photo> = map { it.toDomain() }
+private fun List<DbPhoto>.toDomain(): List<Photo> = map { it.toDomain() }
 
+private fun DbPhoto.toDomain(): Photo =
+    Photo(
+//        camera,
+        earthDate,
+        id,
+        imgSrc,
+//        rover,
+        sol,
+        favorite
+    )
+
+private fun List<Photo>.fromDomain(): List<DbPhoto> = map { it.fromDomain() }
+
+private fun Photo.fromDomain(): DbPhoto =
+    DbPhoto(
+//        camera,
+        earthDate,
+        id,
+        imgSrc,
+//        rover,
+        sol,
+        favorite
+    )
 
 

@@ -16,18 +16,8 @@ import androidx.navigation.NavController
 import androidx.recyclerview.widget.DiffUtil
 import com.bumptech.glide.Glide
 import es.architectcoders.domain.Apod
-import es.architectcoders.domain.Camera
-import es.architectcoders.domain.CameraX
-import es.architectcoders.domain.Photo
-import es.architectcoders.domain.Rover
 import es.architectcoders.spaceexplorer.R
-import es.architectcoders.spaceexplorer.framework.server.roverServer.CameraResponse
-import es.architectcoders.spaceexplorer.framework.server.roverServer.CameraXResponse
-import es.architectcoders.spaceexplorer.framework.server.roverServer.RoverResponse
 import es.architectcoders.spaceexplorer.ui.model.ApodObject
-import es.architectcoders.spaceexplorer.ui.model.CameraObject
-import es.architectcoders.spaceexplorer.ui.model.PhotoObject
-import es.architectcoders.spaceexplorer.ui.model.RoverObject
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
@@ -44,7 +34,7 @@ fun ImageView.loadUrl(url: String?) {
     Glide.with(context).load(url).error(R.mipmap.ic_launcher).into(this)
 }
 
-fun LinearLayout.toggleVisibilityWithAnimation(imageButton: ImageButton, duration: Long = 200) {
+    fun LinearLayout.toggleVisibilityWithAnimation(imageButton: ImageButton, duration: Long = 200) {
     if (visibility == View.VISIBLE) {
         animateVisibilityWithAnimation(false, duration, imageButton)
     } else {
@@ -130,90 +120,89 @@ fun Apod.toViewObject() = ApodObject(
     url = url,
     favorite = favorite
 )
-
-fun PhotoObject.toDomain() = Photo(
-    camera = camera.toDomain(),
-    earthDate = earthDate,
-    id = id,
-    imgSrc = imgSrc,
-    rover = rover.toDomain(),
-    sol = sol,
-    favorite = favorite
-)
-
-fun CameraObject.toCameraResponse() = CameraResponse(
-    fullName = fullName,
-    id = id,
-    name = name,
-    roverId = roverId
-)
-
-fun RoverObject.toRoverResponse() = RoverResponse(
-    cameras = cameras.map { it.toCameraXResponse() },
-    id = id,
-    landingDate = landingDate,
-    launchDate = launchDate,
-    maxDate = maxDate,
-    maxSol = maxSol,
-    name = name,
-    status = status,
-    totalPhotos = totalPhotos
-)
-
-fun Photo.toViewObject() = PhotoObject(
-    camera = camera.toCameraResponse(),
-    earthDate = earthDate,
-    id = id,
-    imgSrc = imgSrc,
-    rover = rover.toRoverResponse(),
-    sol = sol,
-    favorite = favorite
-)
-
-fun Camera.toCameraResponse() = CameraResponse(
-    fullName = fullName,
-    id = id,
-    name = name,
-    roverId = roverId
-)
-
-fun Rover.toRoverResponse() = RoverResponse(
-    cameras = cameras.map { it.toCameraXResponse() },
-    id = id,
-    landingDate = landingDate,
-    launchDate = launchDate,
-    maxDate = maxDate,
-    maxSol = maxSol,
-    name = name,
-    status = status,
-    totalPhotos = totalPhotos
-)
-
-fun CameraX.toCameraXResponse() = CameraXResponse(
-    fullName = fullName,
-    name = name
-)
-
-fun CameraResponse.toDomain() = Camera(
-    fullName = fullName,
-    id = id,
-    name = name,
-    roverId = roverId
-)
-
-fun RoverResponse.toDomain() = Rover(
-    cameras = cameras.map { it.toDomain() },
-    id = id,
-    landingDate = landingDate,
-    launchDate = launchDate,
-    maxDate = maxDate,
-    maxSol = maxSol,
-    name = name,
-    status = status,
-    totalPhotos = totalPhotos
-)
-
-fun CameraXResponse.toDomain() = CameraX(
-    fullName = fullName,
-    name = name
-)
+//fun PhotoObject.toDomain() = Photo(
+//    camera = camera.toDomain(),
+//    earthDate = earthDate,
+//    id = id,
+//    imgSrc = imgSrc,
+//    rover = rover.toDomain(),
+//    sol = sol,
+//    favorite = favorite
+//)
+//
+//fun CameraObject.toCameraResponse() = CameraResponse(
+//    fullName = fullName,
+//    id = id,
+//    name = name,
+//    roverId = roverId
+//)
+//
+//fun RoverObject.toRoverResponse() = RoverResponse(
+//    cameras = cameras.map { it.toCameraXResponse() },
+//    id = id,
+//    landingDate = landingDate,
+//    launchDate = launchDate,
+//    maxDate = maxDate,
+//    maxSol = maxSol,
+//    name = name,
+//    status = status,
+//    totalPhotos = totalPhotos
+//)
+//
+//fun Photo.toViewObject() = PhotoObject(
+//    camera = camera.toCameraResponse(),
+//    earthDate = earthDate,
+//    id = id,
+//    imgSrc = imgSrc,
+//    rover = rover.toRoverResponse(),
+//    sol = sol,
+//    favorite = favorite
+//)
+//
+//fun Camera.toCameraResponse() = CameraResponse(
+//    fullName = fullName,
+//    id = id,
+//    name = name,
+//    roverId = roverId
+//)
+//
+//fun Rover.toRoverResponse() = RoverResponse(
+//    cameras = cameras.map { it.toCameraXResponse() },
+//    id = id,
+//    landingDate = landingDate,
+//    launchDate = launchDate,
+//    maxDate = maxDate,
+//    maxSol = maxSol,
+//    name = name,
+//    status = status,
+//    totalPhotos = totalPhotos
+//)
+//
+//fun CameraX.toCameraXResponse() = CameraXResponse(
+//    fullName = fullName,
+//    name = name
+//)
+//
+//fun CameraResponse.toDomain() = Camera(
+//    fullName = fullName,
+//    id = id,
+//    name = name,
+//    roverId = roverId
+//)
+//
+//fun RoverResponse.toDomain() = Rover(
+//    cameras = cameras.map { it.toDomain() },
+//    id = id,
+//    landingDate = landingDate,
+//    launchDate = launchDate,
+//    maxDate = maxDate,
+//    maxSol = maxSol,
+//    name = name,
+//    status = status,
+//    totalPhotos = totalPhotos
+//)
+//
+//fun CameraXResponse.toDomain() = CameraX(
+//    fullName = fullName,
+//    name = name
+//)
