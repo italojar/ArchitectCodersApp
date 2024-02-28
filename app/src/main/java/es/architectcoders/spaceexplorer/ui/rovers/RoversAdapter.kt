@@ -30,7 +30,9 @@ class RoversAdapter(private val listener: (Photo) -> Unit) :
 
         fun bind(photo: Photo) {
             binding.photo = photo
-            binding.llData.toggleVisibilityWithAnimation(binding.ibExpand)
+            binding.ibExpand.setOnClickListener {
+                binding.llData.toggleVisibilityWithAnimation(binding.ibExpand)
+            }
         }
     }
 
