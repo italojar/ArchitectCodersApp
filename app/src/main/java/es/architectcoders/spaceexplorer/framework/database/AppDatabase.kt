@@ -8,8 +8,7 @@ import es.architectcoders.spaceexplorer.framework.database.apodDb.ApodEntity
 import es.architectcoders.spaceexplorer.framework.database.roverDb.PhotoEntity
 import es.architectcoders.spaceexplorer.framework.database.roverDb.RoversDao
 
-@Database(entities = [ApodEntity::class, PhotoEntity::class], version = 2,
-    autoMigrations = [AutoMigration(from = 1, to = 2)], exportSchema = true)
+@Database(entities = [ApodEntity::class, PhotoEntity::class], version = 1, exportSchema = false)
 abstract class AppDatabase: RoomDatabase() {
     abstract fun getApodDao(): ApodDao
     abstract fun getRoversDao(): RoversDao
