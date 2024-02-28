@@ -59,7 +59,6 @@ class RoversViewModel @Inject constructor(
             val error = requestRoversUseCase()
             _state.update { _state.value.copy(loading = false, error = error) }
         }
-
     }
 
     data class UiState(

@@ -35,6 +35,4 @@ class RoversAdapter(private val listener: (Photo) -> Unit) :
             }
         }
     }
-
-
 }

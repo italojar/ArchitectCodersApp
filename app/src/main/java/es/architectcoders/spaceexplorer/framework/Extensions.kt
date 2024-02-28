@@ -63,39 +63,6 @@ fun ApodResponse.toDomain() = Apod(
     favorite = false
 )
 
-//fun List<Photo>.toEntity() : List<PhotoEntity> {
-//    return this.map {
-//        it.toEntity()
-//    }
-//}
-//
-///**
-// * Map from Photo DOMAIN to Photo Database
-// */
-//fun Photo.toEntity() = PhotoEntity(
-//    camera = this.camera,
-//    earthDate = this.earthDate,
-//    id = this.id,
-//    imgSrc = this.imgSrc,
-//    rover = this.rover,
-//    sol = this.sol,
-//    favorite = this.favorite
-//)
-//
-//fun PhotoEntity.toDomain() = Photo(
-//    camera = this.camera,
-//    earthDate = this.earthDate,
-//    id = this.id,
-//    imgSrc = this.imgSrc,
-//    rover = this.rover,
-//    sol = this.sol,
-//    favorite = this.favorite
-//)
-
-
-
-
-
 fun Throwable.toError(): Error = when (this) {
     is IOException -> Error.Connectivity
     is HttpException -> Error.Server(code())
