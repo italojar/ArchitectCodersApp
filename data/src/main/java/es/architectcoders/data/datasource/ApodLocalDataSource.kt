@@ -10,6 +10,8 @@ interface ApodLocalDataSource {
 
     val getApods: Flow<List<Apod>>
 
+    val getFavoriteApods: Flow<List<Apod>>
+
     suspend fun isApodEmpty(): Boolean
 
     suspend fun apodExists(apod: Apod?): Boolean

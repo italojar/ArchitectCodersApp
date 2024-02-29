@@ -1,5 +1,6 @@
 package es.architectcoders.spaceexplorer.framework.database.apodDb
 
+import android.util.Log
 import es.architectcoders.data.datasource.ApodLocalDataSource
 import es.architectcoders.domain.Apod
 import es.architectcoders.domain.Error
@@ -16,6 +17,11 @@ class ApodRoomDataSource @Inject constructor(
 
     override val getApods: Flow<List<Apod>> = apodDao.getAllApods().map { apodList ->
         apodList.map { apodEntity -> apodEntity.toDomain() }
+    }
+
+    override val getFavoriteApods: Flow<List<Apod>> = apodDao.getAllApods().map { apodList ->
+        Log.d("getFavoriteApodsList/////////////////////////////", apodList.toString())
+        apodList.filter { apod -> apod.favorite }.map { apodEntity -> apodEntity.toDomain() }
     }
 
     override suspend fun saveApod(apod: Apod?): Error? = try {

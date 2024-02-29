@@ -8,6 +8,8 @@
     <string name="copyright">© %1$s</string>
     <string name="earth_date">Earth date: %s</string>
     <string name="sol">Sol: %s</string>
+    <string name="title_apod">Title: %s</string>
+    <string name="explanation_apod">Explanation: %s</string>
     <!-- error messages -->
     <string name="server_error">The data could not be obtained.</string>
     <string name="connectivity_error">Please, check your connection.</string>

@@ -1,15 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.favourite.FavouriteFragment">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="Favourite"
-        android:textColor="@color/white"/>
+    <data>
 
-</FrameLayout>
+        <variable
+            name="loading"
+            type="boolean" />
+
+        <variable
+            name="favoriteList"
+            type="java.util.List&lt;java.lang.Object>" />
+
+        <variable
+            name="error"
+            type="es.architectcoders.domain.Error" />
+
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvFavorites"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:items="@{favoriteList}"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/favorite_item"
+            app:visible="@{error == null}"/>
+
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/common_padding_default"
+            android:indeterminate="true"
+            app:visible="@{loading}" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

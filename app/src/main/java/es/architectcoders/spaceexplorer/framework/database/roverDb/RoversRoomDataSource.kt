@@ -17,9 +17,9 @@ class RoversRoomDataSource @Inject constructor(
         it.toDomain()
     }
 
-//    override val getFavoritePhoto: Flow<List<Photo>> = roversDao.getAllRovers().map { listaPhotos ->
-//        listaPhotos.filter { elementoDelistaPhotos-> elementoDelistaPhotos.favorite }.toDomain()
-//    }
+    override val getFavoritePhoto: Flow<List<Photo>> = roversDao.getAllRovers().map { listaPhotos ->
+        listaPhotos.filter { elementoDelistaPhotos-> elementoDelistaPhotos.favorite }.toDomain()
+    }
 
     override suspend fun saveRovers(rovers: List<Photo>): Error? = tryCall {
         roversDao.insertRovers(rovers.fromDomain())
