@@ -8,6 +8,7 @@ buildscript {
         classpath(es.architectcoders.buildSrc.Libs.androidGradlePlugin)
         classpath(es.architectcoders.buildSrc.Libs.hiltGradlePlugin)
         classpath(es.architectcoders.buildSrc.Libs.secretsGradlePlugin)
+        classpath(es.architectcoders.buildSrc.Libs.navigationSafeArgsPlugin)
     }
 }
 plugins {
