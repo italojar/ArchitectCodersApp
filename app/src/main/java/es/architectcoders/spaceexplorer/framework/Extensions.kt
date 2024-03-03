@@ -35,14 +35,15 @@ fun ApodEntity.toDomain() = Apod(
     serviceVersion = this.serviceVersion,
     title = this.title,
     url = this.url,
-    favorite = this.favorite
+    favorite = this.favorite,
+    type = "Apod"
 )
 
 fun ApodResponse.toEntity() = ApodEntity(
     copyright = this.copyright ?: "",
     date = this.date,
     explanation = this.explanation,
-    hdurl = this.hdurl,
+    hdurl = this.hdurl ?: "",
     mediaType = this.mediaType,
     serviceVersion = this.serviceVersion,
     title = this.title,
@@ -55,12 +56,13 @@ fun ApodResponse.toDomain() = Apod(
     copyright = this.copyright ?: "",
     date = this.date,
     explanation = this.explanation,
-    hdurl = this.hdurl,
+    hdurl = this.hdurl ?: "",
     mediaType = this.mediaType,
     serviceVersion = this.serviceVersion,
     title = this.title,
     url = this.url,
-    favorite = false
+    favorite = false,
+    type = "Apod"
 )
 
 fun Throwable.toError(): Error = when (this) {

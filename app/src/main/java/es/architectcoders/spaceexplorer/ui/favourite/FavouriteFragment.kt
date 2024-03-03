@@ -1,7 +1,6 @@
 package es.architectcoders.spaceexplorer.ui.favourite
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -37,8 +36,7 @@ class FavouriteFragment : Fragment(R.layout.fragment_favourite) {
 
         viewLifecycleOwner.launchAndCollectT(viewModel.state) {
             binding.loading = it.loading
-            binding.favoriteList = it.favoriteList
-            Log.d("TAG//////////////////////////////", "onViewCreated: ${it.favoriteList}")
+            binding.listitems = it.items
             binding.error = it.error
 
         }

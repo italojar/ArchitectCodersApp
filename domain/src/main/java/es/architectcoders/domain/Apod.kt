@@ -1,14 +1,15 @@
 package es.architectcoders.domain
 
 data class Apod(
-    val id: Int,
+    override var id: Int,
     val copyright: String,
-    val date: String,
-    val explanation: String,
-    val hdurl: String,
-    val mediaType: String,
-    val serviceVersion: String,
-    val title: String,
-    val url: String,
-    val favorite: Boolean
-)
+    override val date: String,
+    override val explanation: String,
+    override val hdurl: String,
+    override val mediaType: String,
+    override val serviceVersion: String,
+    override val title: String,
+    override val url: String,
+    override var favorite: Boolean = false,
+    override val type: String = "apod"
+) : NasaItem

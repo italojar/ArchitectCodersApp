@@ -6,17 +6,23 @@
 
     <data>
 
+        <import type="java.util.List" />
+
         <variable
             name="loading"
             type="boolean" />
 
         <variable
-            name="favoriteList"
-            type="java.util.List&lt;java.lang.Object>" />
+            name="item"
+            type="es.architectcoders.domain.NasaItem" />
 
         <variable
             name="error"
             type="es.architectcoders.domain.Error" />
+
+        <variable
+            name="listitems"
+            type="java.util.List&lt;es.architectcoders.domain.NasaItem>" />
 
     </data>
 
@@ -29,7 +35,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:items="@{favoriteList}"
+            app:items="@{listitems}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/favorite_item"
             app:visible="@{error == null}"/>

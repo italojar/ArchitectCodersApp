@@ -7,7 +7,15 @@ import androidx.room.PrimaryKey
 data class PhotoEntity(
     val earthDate: String,
     @PrimaryKey(autoGenerate = true) val id: Int,
-    val imgSrc: String,
+    val date: String,
+    val title: String?,
+    val explanation: String?,
+    val hdurl: String?,
+    val url: String?,
+    val mediaType: String?,
+    val serviceVersion: String,
+    val type: String,
+    var favorite: Boolean,
     val sol: String,
-    val favorite: Boolean
+    val imgSrc: String
 )
