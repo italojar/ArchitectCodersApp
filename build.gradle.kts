@@ -6,6 +6,7 @@ buildscript {
     }
     dependencies {
         classpath(es.architectcoders.buildSrc.Libs.androidGradlePlugin)
+        classpath(es.architectcoders.buildSrc.Libs.hiltGradlePlugin)
     }
 }
 plugins {
