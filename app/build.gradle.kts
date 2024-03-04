@@ -92,7 +92,7 @@ dependencies {
     implementation(Libs.AndroidX.Room.ktx)
     annotationProcessor(Libs.AndroidX.Room.compiler)
     kapt(Libs.AndroidX.Room.compiler)
-    // Corrutinas
+    // Coroutines
     implementation(Libs.Kotlin.Coroutines.core)
     //implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
     // Hilt
