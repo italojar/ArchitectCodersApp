@@ -6,15 +6,8 @@ buildscript {
     }
     dependencies {
         classpath(es.architectcoders.buildSrc.Libs.androidGradlePlugin)
-        classpath(es.architectcoders.buildSrc.Libs.hiltGradlePlugin)
+        classpath(es.architectcoders.buildSrc.Libs.Hilt.gradlePlugin)
         classpath(es.architectcoders.buildSrc.Libs.secretsGradlePlugin)
-        classpath(es.architectcoders.buildSrc.Libs.navigationSafeArgsPlugin)
+        classpath(es.architectcoders.buildSrc.Libs.AndroidX.Navigation.gradlePlugin)
     }
-}
-plugins {
-    id("org.jetbrains.kotlin.android") version "1.9.0" apply false
-    //navigation-safe-args
-    id("androidx.navigation.safeargs") version "2.5.3" apply false
-    //kotlin
-    id("org.jetbrains.kotlin.jvm") version "1.9.0" apply false
 }
