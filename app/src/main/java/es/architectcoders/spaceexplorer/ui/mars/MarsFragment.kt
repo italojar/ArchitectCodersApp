@@ -1,7 +1,6 @@
 package es.architectcoders.spaceexplorer.ui.mars
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -32,7 +31,6 @@ class MarsFragment : Fragment(R.layout.fragment_mars) {
         viewLifecycleOwner.launchAndCollectT(viewModel.state) {
             binding.loading = it.loading
             binding.notificationsList = it.notificationsList
-            Log.d("LIST FRAGMENT///////", it.notificationsList.toString())
             binding.error = it.error.also { error ->
                 if (error != null) {
                     when (error) {

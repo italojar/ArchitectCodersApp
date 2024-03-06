@@ -29,6 +29,35 @@ class NotificationsAdapter :
 
         fun bind(notificationsItem: NotificationsItem) {
             binding.notificationsItem = notificationsItem
+            binding.ibExpand.setOnClickListener {
+                expandLLData()
+            }
+        }
+
+        private fun expandLLData() {
+            if (binding.llData.visibility == View.VISIBLE) {
+                binding.llData.visibility = View.GONE
+                binding.ibExpand.setImageResource(R.drawable.ic_expand_more)
+            } else {
+                binding.llData.visibility = View.VISIBLE
+
+                binding.tvBody.measure(
+                    View.MeasureSpec.makeMeasureSpec(
+                        binding.llData.width,
+                        View.MeasureSpec.EXACTLY
+                    ),
+                    View.MeasureSpec.makeMeasureSpec(
+                        binding.tvBody.height,
+                        View.MeasureSpec.EXACTLY
+                    )
+                )
+
+                val layoutParams = binding.llData.layoutParams
+                layoutParams.height = binding.tvBody.measuredHeight
+                binding.llData.layoutParams = layoutParams
+
+                binding.ibExpand.setImageResource(R.drawable.ic_expand_less)
+            }
         }
     }
 }

@@ -1,12 +1,11 @@
 package es.architectcoders.spaceexplorer.framework.database.notificationsDb
 
-import android.util.Log
 import es.architectcoders.data.datasource.NotificationsLocalDataSource
-import es.architectcoders.domain.NotificationsItem
 import es.architectcoders.domain.Error
+import es.architectcoders.domain.NotificationsItem
+import es.architectcoders.spaceexplorer.framework.tryCall
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import es.architectcoders.spaceexplorer.framework.tryCall
 import javax.inject.Inject
 import es.architectcoders.spaceexplorer.framework.database.notificationsDb.NotificationsItemEntity as DbNotificationsItem
 
@@ -16,7 +15,6 @@ class NotificationsRoomDataSource @Inject constructor(
 
     override val getNotifications: Flow<List<NotificationsItem>> =
         notificationsDao.getAllNotifications().map {
-            Log.d("GET LIST ROOM DATA SOURCE///////", it.toString())
             it.toDomain() }
 
     override suspend fun saveNotifications(notifications: List<NotificationsItem>): Error? = tryCall {
@@ -31,17 +29,16 @@ class NotificationsRoomDataSource @Inject constructor(
 
 }
 private fun List<DbNotificationsItem>.toDomain(): List<NotificationsItem> = map {
-    Log.d("LIST ROOM DBnOTIFICATIONS TO DOMAIN DATA SOURCE///////", it.toString())
     it.toDomain() }
 
 
 private fun DbNotificationsItem.toDomain(): NotificationsItem =
     NotificationsItem(
-        messageType,
+        messageIssueTime,
         messageID,
         messageURL,
-        messageIssueTime,
-        messageBody
+        messageBody,
+        messageType
     )
 
 private fun List<NotificationsItem>.fromDomain(): List<DbNotificationsItem> = map { it.fromDomain() }
@@ -49,9 +46,9 @@ private fun List<NotificationsItem>.fromDomain(): List<DbNotificationsItem> = ma
 private fun NotificationsItem.fromDomain(): DbNotificationsItem =
     DbNotificationsItem(
         id = 0,
-        messageType,
+        messageIssueTime,
         messageID,
         messageURL,
-        messageIssueTime,
-        messageBody
+        messageBody,
+        messageType
     )

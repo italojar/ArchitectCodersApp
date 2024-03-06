@@ -1,6 +1,5 @@
 package es.architectcoders.spaceexplorer.ui.mars
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -23,20 +22,19 @@ class MarsViewModel @Inject constructor(
     getNotificationsUseCase: GetNotificationsUseCase
 ) : ViewModel() {
 
-    private val _state = MutableStateFlow(UiState())
+    private val _state = MutableStateFlow(UiState(loading = true))
     val state: StateFlow<UiState> = _state.asStateFlow()
 
     init {
         viewModelScope.launch {
+            _state.update { _state.value.copy(loading = true) }
             getNotificationsUseCase()
                 .catch { cause -> _state.update { it.copy(error = cause.toError()) } }
                 .collect{ notifications -> _state.update {
-                    Log.d("LIST VIEW MODEL///////", it.notificationsList.toString())
-                    UiState(notificationsList = notifications)
+                    UiState(loading = false, notificationsList = notifications)
                 } }
         }
     }
-
 
     fun retry() {
         viewModelScope.launch {
