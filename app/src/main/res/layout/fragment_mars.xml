@@ -27,6 +27,7 @@
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvNotifications"
             android:layout_width="match_parent"
@@ -38,11 +39,13 @@
             app:visible="@{error == null}"/>
 
         <com.google.android.material.progressindicator.CircularProgressIndicator
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="@dimen/common_padding_default"
             android:indeterminate="true"
+            style="@style/Widget.Material3.CircularProgressIndicator"
+            app:indicatorColor="@color/blue_dark"
             app:visible="@{loading}" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

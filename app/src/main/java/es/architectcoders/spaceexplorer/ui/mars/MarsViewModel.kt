@@ -21,20 +21,29 @@ class MarsViewModel @Inject constructor(
     private val requestNotificationsUseCase: RequestNotificationsUseCase,
     getNotificationsUseCase: GetNotificationsUseCase
 ) : ViewModel() {
-
-    private val _state = MutableStateFlow(UiState(loading = true))
+    private val _state = MutableStateFlow(UiState())
     val state: StateFlow<UiState> = _state.asStateFlow()
-
     init {
         viewModelScope.launch {
-            _state.update { _state.value.copy(loading = true) }
             getNotificationsUseCase()
                 .catch { cause -> _state.update { it.copy(error = cause.toError()) } }
                 .collect{ notifications -> _state.update {
-                    UiState(loading = false, notificationsList = notifications)
-                } }
+                    UiState(notificationsList = notifications) }
+                }
         }
     }
+    fun onUiReady() {
+        viewModelScope.launch {
+            _state.value = _state.value.copy(loading = true)
+            val error = requestNotificationsUseCase()
+            _state.update { _state.value.copy(loading = false, error = error) }
+        }
+    }
+    data class UiState(
+        val loading: Boolean = false,
+        val notificationsList: List<NotificationsItem>? = null,
+        val error: Error? = null
+    )
 
     fun retry() {
         viewModelScope.launch {
@@ -45,18 +54,4 @@ class MarsViewModel @Inject constructor(
             }
         }
     }
-
-    fun onUiReady() {
-        viewModelScope.launch {
-            _state.value = _state.value.copy(loading = true)
-            val error = requestNotificationsUseCase()
-            _state.update { _state.value.copy(loading = false, error = error) }
-        }
-    }
-
-    data class UiState(
-        val loading: Boolean = false,
-        val notificationsList: List<NotificationsItem>? = null,
-        val error: Error? = null
-    )
 }
