@@ -39,6 +39,7 @@ fun setMessageTypeText(textView: MaterialTextView, messageType: String?) {
             "MPC" -> "Travesía de la Magnetopausa"
             "GST" -> "Tormenta Geomagnética"
             "RBE" -> "Aumento del Cinturón de Radiación"
+            "Report" -> "Informe"
             else -> ""
         }
         textView.text = messageText
