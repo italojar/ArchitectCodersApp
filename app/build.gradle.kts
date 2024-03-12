@@ -112,6 +112,9 @@ dependencies {
     kapt ("com.github.bumptech.glide:compiler:4.15.1")
     // Shimmer
     implementation("com.facebook.shimmer:shimmer:0.5.0")
+    // Mockito
+    testImplementation("org.mockito.kotlin:mockito-kotlin:4.1.0")
+    testImplementation("org.mockito:mockito-inline:4.8.0")
     //Test
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")

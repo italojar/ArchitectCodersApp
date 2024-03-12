@@ -11,11 +11,14 @@ java {
 dependencies {
     implementation(project(mapOf("path" to ":domain")))
     // Corrutinas
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1")
     // Javax inject
     implementation("javax.inject:javax.inject:1")
     // Arrow kt
     implementation("io.arrow-kt:arrow-core:1.1.5")
+    // Mockito
+    testImplementation("org.mockito.kotlin:mockito-kotlin:4.1.0")
+    testImplementation("org.mockito:mockito-inline:4.8.0")
     //Test
     testImplementation("junit:junit:4.13.2")
 }
