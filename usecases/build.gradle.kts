@@ -22,8 +22,4 @@ dependencies {
     testImplementation("org.mockito:mockito-inline:5.2.0")
     //Test
     testImplementation("junit:junit:4.13.2")
-    testImplementation("junit:junit:4.12")
-    testImplementation("junit:junit:4.12")
-    testImplementation("junit:junit:4.12")
-    testImplementation("junit:junit:4.12")
 }

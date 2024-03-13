@@ -1,5 +1,6 @@
 package es.architectcoders.usecases
 
+import es.architectcoders.domain.NotificationsItem
 import es.architectcoders.domain.Photo
 
 internal val samplePhoto = Photo(
@@ -8,4 +9,12 @@ internal val samplePhoto = Photo(
     "https://example.com",
     "1",
     false
+)
+
+internal val sampleNotificationsItem = NotificationsItem(
+    "2023-01-01",
+    "023_AB_123",
+    "",
+    "https://example.com",
+    "FLR"
 )

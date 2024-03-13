@@ -17,8 +17,8 @@ dependencies {
     // Arrow kt
     implementation("io.arrow-kt:arrow-core:1.1.5")
     // Mockito
-    testImplementation("org.mockito.kotlin:mockito-kotlin:4.1.0")
-    testImplementation("org.mockito:mockito-inline:4.8.0")
+    testImplementation("org.mockito.kotlin:mockito-kotlin:5.0.0")
+    testImplementation("org.mockito:mockito-inline:5.2.0")
     //Test
     testImplementation("junit:junit:4.13.2")
 }
