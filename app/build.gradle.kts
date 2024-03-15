@@ -64,6 +64,7 @@ dependencies {
     implementation(project(mapOf("path" to ":domain")))
     implementation(project(mapOf("path" to ":usecases")))
     implementation(project(mapOf("path" to ":data")))
+    implementation(project(mapOf("path" to ":testShared")))
 
     //Core
     implementation("androidx.core:core-ktx:1.12.0")
@@ -84,9 +85,13 @@ dependencies {
     // ViewModel
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
     // Corrutinas
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.1")
     // Hilt
     implementation("com.google.dagger:hilt-android:2.49")
+    testImplementation(project(":testShared"))
+    testImplementation(project(":data"))
+    testImplementation(project(":usecases"))
     kapt("com.google.dagger:hilt-compiler:2.49")
     // Livedata
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.2")
@@ -115,6 +120,8 @@ dependencies {
     // Mockito
     testImplementation("org.mockito.kotlin:mockito-kotlin:4.1.0")
     testImplementation("org.mockito:mockito-inline:4.8.0")
+    //Turbine
+    testImplementation("app.cash.turbine:turbine:0.12.1")
     //Test
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
