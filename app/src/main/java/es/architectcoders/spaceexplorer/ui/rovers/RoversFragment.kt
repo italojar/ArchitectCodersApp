@@ -20,12 +20,16 @@ class RoversFragment : Fragment(R.layout.fragment_rovers) {
 
     private val viewModel: RoversViewModel by viewModels()
 
+    private lateinit var roversState: RoversState
+
     private val roversAdapter : RoversAdapter = RoversAdapter {
         viewModel.saveRoversAsFavourite(it)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        roversState = buildRoversState()
 
         val binding = FragmentRoversBinding.bind(view).apply {
             rvRovers.adapter = roversAdapter
@@ -44,7 +48,9 @@ class RoversFragment : Fragment(R.layout.fragment_rovers) {
                 }
             }
         }
-        viewModel.onUiReady()
+        roversState.requestStoragePermission {
+            viewModel.onUiReady()
+        }
     }
 
     private fun showErrorDialog(error: String) {

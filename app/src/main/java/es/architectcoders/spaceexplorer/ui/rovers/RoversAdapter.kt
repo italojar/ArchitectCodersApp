@@ -9,6 +9,7 @@ import es.architectcoders.spaceexplorer.R
 import es.architectcoders.spaceexplorer.databinding.RoversItemBinding
 import es.architectcoders.spaceexplorer.ui.common.basicDiffUtil
 import es.architectcoders.spaceexplorer.ui.common.inflate
+import es.architectcoders.spaceexplorer.ui.common.saveImageFromUrlToGallery
 import es.architectcoders.spaceexplorer.ui.common.toggleVisibilityWithAnimation
 
 class RoversAdapter(private val listener: (Photo) -> Unit) :
@@ -32,6 +33,10 @@ class RoversAdapter(private val listener: (Photo) -> Unit) :
             binding.photo = photo
             binding.ibExpand.setOnClickListener {
                 binding.llData.toggleVisibilityWithAnimation(binding.ibExpand)
+            }
+            binding.ibDownload.setOnClickListener {
+
+                saveImageFromUrlToGallery(photo.imgSrc, binding.root.context)
             }
         }
     }
