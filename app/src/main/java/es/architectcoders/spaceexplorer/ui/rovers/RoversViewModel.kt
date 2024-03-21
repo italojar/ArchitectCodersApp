@@ -29,6 +29,10 @@ class RoversViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
+            _state.value = _state.value.copy(loading = true)
+            val error = requestRoversUseCase()
+            _state.update { _state.value.copy(loading = false, error = error) }
+
             getRoversUseCase()
                 .catch { cause -> _state.update { it.copy(error = cause.toError()) } }
                 .collect{ photos -> _state.update {
@@ -53,13 +57,13 @@ class RoversViewModel @Inject constructor(
         }
     }
 
-    fun onUiReady() {
-        viewModelScope.launch {
-            _state.value = _state.value.copy(loading = true)
-            val error = requestRoversUseCase()
-            _state.update { _state.value.copy(loading = false, error = error) }
-        }
-    }
+//    fun onUiReady() {
+//        viewModelScope.launch {
+//            _state.value = _state.value.copy(loading = true)
+//            val error = requestRoversUseCase()
+//            _state.update { _state.value.copy(loading = false, error = error) }
+//        }
+//    }
 
     data class UiState(
         val loading: Boolean = false,
