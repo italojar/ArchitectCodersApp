@@ -1,5 +1,6 @@
 package es.architectcoders.spaceexplorer.ui.rovers
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
@@ -10,6 +11,7 @@ import es.architectcoders.domain.Error
 import es.architectcoders.spaceexplorer.R
 import es.architectcoders.spaceexplorer.databinding.FragmentRoversBinding
 import es.architectcoders.spaceexplorer.ui.common.launchAndCollectT
+import es.architectcoders.spaceexplorer.ui.common.saveImageFromUrlToGallery
 
 @AndroidEntryPoint
 class RoversFragment : Fragment(R.layout.fragment_rovers) {
@@ -22,7 +24,14 @@ class RoversFragment : Fragment(R.layout.fragment_rovers) {
 
     private lateinit var roversState: RoversState
 
-    private val roversAdapter : RoversAdapter = RoversAdapter {
+    private val onDownloadImageOnClick: (url: String, context: Context) -> Unit = { url, context ->
+        roversState.requestStoragePermission {
+            saveImageFromUrlToGallery(url, context)
+        }
+    }
+
+    private val roversAdapter : RoversAdapter = RoversAdapter (
+        onDownloadImageOnClick = onDownloadImageOnClick) {
         viewModel.saveRoversAsFavourite(it)
     }
 
@@ -47,9 +56,6 @@ class RoversFragment : Fragment(R.layout.fragment_rovers) {
                     }
                 }
             }
-        }
-        roversState.requestStoragePermission {
-            viewModel.onUiReady()
         }
     }
 

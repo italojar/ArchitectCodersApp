@@ -1,5 +1,6 @@
 package es.architectcoders.spaceexplorer.ui.rovers
 
+import android.content.Context
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
@@ -9,15 +10,16 @@ import es.architectcoders.spaceexplorer.R
 import es.architectcoders.spaceexplorer.databinding.RoversItemBinding
 import es.architectcoders.spaceexplorer.ui.common.basicDiffUtil
 import es.architectcoders.spaceexplorer.ui.common.inflate
-import es.architectcoders.spaceexplorer.ui.common.saveImageFromUrlToGallery
 import es.architectcoders.spaceexplorer.ui.common.toggleVisibilityWithAnimation
 
-class RoversAdapter(private val listener: (Photo) -> Unit) :
+class RoversAdapter(
+    private val onDownloadImageOnClick: (url: String, context: Context) -> Unit,
+    private val listener: (Photo) -> Unit) :
     ListAdapter<Photo, RoversAdapter.ViewHolder>(basicDiffUtil { old, new -> old.id == new.id }) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = parent.inflate(R.layout.rovers_item, false)
-        return ViewHolder(view)
+        return ViewHolder(view, onDownloadImageOnClick)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -26,7 +28,10 @@ class RoversAdapter(private val listener: (Photo) -> Unit) :
         holder.itemView.setOnClickListener { listener(photo) }
     }
 
-    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    class ViewHolder(
+        view: View,
+        private val onDownloadImageOnClick: (url: String, context: Context) -> Unit) :
+        RecyclerView.ViewHolder(view) {
         private val binding = RoversItemBinding.bind(view)
 
         fun bind(photo: Photo) {
@@ -35,8 +40,7 @@ class RoversAdapter(private val listener: (Photo) -> Unit) :
                 binding.llData.toggleVisibilityWithAnimation(binding.ibExpand)
             }
             binding.ibDownload.setOnClickListener {
-
-                saveImageFromUrlToGallery(photo.imgSrc, binding.root.context)
+                onDownloadImageOnClick(photo.imgSrc, it.context)
             }
         }
     }
