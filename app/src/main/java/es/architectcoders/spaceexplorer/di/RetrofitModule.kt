@@ -9,6 +9,7 @@ import es.architectcoders.spaceexplorer.BuildConfig
 import es.architectcoders.spaceexplorer.R
 import es.architectcoders.spaceexplorer.framework.server.apodServer.ApodApiClient
 import es.architectcoders.spaceexplorer.framework.server.NasaInterceptor
+import es.architectcoders.spaceexplorer.framework.server.notificationsServer.NotificationsApiClient
 import es.architectcoders.spaceexplorer.framework.server.roverServer.RoversApiClient
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -39,6 +40,12 @@ object  RetrofitModule {
     @Singleton
     fun provideRoversApiClient(retrofit: Retrofit): RoversApiClient {
         return retrofit.create(RoversApiClient::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideNotificationsApiClient(retrofit: Retrofit): NotificationsApiClient {
+        return retrofit.create(NotificationsApiClient::class.java)
     }
 
     @Provides
