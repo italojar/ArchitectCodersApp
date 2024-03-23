@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="java.util.List" />
+
+        <import type="es.architectcoders.domain.Photo"/>
+
+        <variable
+            name="loading"
+            type="boolean" />
+
+        <variable
+            name="photoList"
+            type="List&lt;Photo>" />
+
+        <variable
+            name="error"
+            type="es.architectcoders.domain.Error" />
+
+    </data>
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvRovers"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:items="@{photoList}"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/rovers_item"
+        app:visible="@{error == null}"/>
+
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/common_padding_default"
+            android:indeterminate="true"
+            app:visible="@{loading}" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/homeFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_bottom_nav_home"
+        android:title="@string/home"/>
+    <item
+        android:id="@+id/roversFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_bottom_nav_rocket"
+        android:title="@string/rovers"/>
+    <item
+        android:id="@+id/marsFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_bottom_nav_explore"
+        android:title="@string/mars"/>
+    <item
+        android:id="@+id/favouriteFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_favorite_empty"
+        android:title="@string/favourite"/>
+</menu>

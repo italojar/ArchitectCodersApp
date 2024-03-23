@@ -1,20 +1,40 @@
+import es.architectcoders.buildSrc.Libs
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("kotlin-parcelize")
+    id("com.google.dagger.hilt.android")
+    id("dagger.hilt.android.plugin")
+    id("androidx.navigation.safeargs.kotlin")
+    //secrets-gradle-plugin
+    id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
+    //kotlin kpt plugin
+    id("org.jetbrains.kotlin.kapt")
 }
 
 android {
     namespace = "es.architectcoders.spaceexplorer"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "es.architectcoders.spaceexplorer"
         minSdk = 24
-        targetSdk = 33
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        kapt {
+            arguments {
+                arg("room.schemaLocation", "$projectDir/schemas")
+            }
+        }
+
+        buildFeatures {
+            buildConfig = true
+        }
     }
 
     buildTypes {
@@ -27,21 +47,78 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "17"
+    }
+
+    buildFeatures {
+        viewBinding = true
+    }
+    buildFeatures {
+        dataBinding = true
     }
 }
 
 dependencies {
+    implementation(project(mapOf("path" to ":domain")))
+    implementation(project(mapOf("path" to ":usecases")))
+    implementation(project(mapOf("path" to ":data")))
 
-    implementation("androidx.core:core-ktx:1.9.0")
-    implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("com.google.android.material:material:1.8.0")
-    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    //Core
+    implementation(Libs.AndroidX.coreKtx)
+    implementation(Libs.AndroidX.appCompat)
+    implementation(Libs.AndroidX.recyclerView)
+    implementation(Libs.AndroidX.material)
+    implementation(Libs.AndroidX.constraintLayout)
+    implementation(Libs.AndroidX.legacySupport)
+
+    // Activity
+    implementation(Libs.AndroidX.Activity.ktx)
+    // Fragment
+    implementation(Libs.AndroidX.Fragment.ktx)
+    // Lifecycle
+    implementation(Libs.AndroidX.Lifecycle.runtimeKtx)
+    implementation(Libs.AndroidX.Lifecycle.viewmodelKtx)
+    // Navigation
+    implementation(Libs.AndroidX.Navigation.fragmentKtx)
+    implementation(Libs.AndroidX.Navigation.uiKtx)
+    //splash
+    implementation(Libs.AndroidX.SplashScreen.ktx)
+    // Room
+    implementation(Libs.AndroidX.Room.runtime)
+    implementation(Libs.AndroidX.Room.ktx)
+    annotationProcessor(Libs.AndroidX.Room.compiler)
+    kapt(Libs.AndroidX.Room.compiler)
+    // Coroutines
+    implementation(Libs.Kotlin.Coroutines.core)
+    //implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
+    // Hilt
+    implementation(Libs.Hilt.android)
+    kapt(Libs.Hilt.compiler)
+    // Retrofit
+    implementation(Libs.Retrofit.retrofit)
+    implementation(Libs.Retrofit.converterGson)
+    // OkHttp
+    implementation(Libs.OkHttp3.loginInterceptor)
+    // Maps
+    implementation(Libs.PlayServices.maps)
+    // Arrow kt
+    implementation(Libs.Arrow.core)
+    //Glide
+    implementation (Libs.Glide.glide)
+    kapt (Libs.Glide.compiler)
+    // Shimmer
+    implementation(Libs.Shimmer.shimmer)
+    //Test
+    testImplementation(Libs.JUnit.junit)
+    androidTestImplementation(Libs.AndroidX.Test.Ext.junit)
+    androidTestImplementation(Libs.AndroidX.Test.Espresso.contrib)
+}
+
+// Allow references to generated code
+kapt {
+    correctErrorTypes = true
 }
