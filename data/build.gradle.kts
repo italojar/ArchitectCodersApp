@@ -3,11 +3,7 @@ import es.architectcoders.buildSrc.Libs
 plugins {
     id("java-library")
     id("org.jetbrains.kotlin.jvm")
-}
-
-java {
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
+    id("org.jetbrains.kotlin.kapt")
 }
 
 dependencies {
@@ -21,4 +17,12 @@ dependencies {
     implementation(Libs.Arrow.core)
     //Test
     testImplementation(Libs.JUnit.junit)
+    testImplementation(Libs.Mockito.kotlin)
+    testImplementation(Libs.Mockito.inline)
+    testImplementation("io.mockk:mockk:1.13.2")
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
 }

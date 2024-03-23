@@ -114,8 +114,21 @@ dependencies {
     implementation(Libs.Shimmer.shimmer)
     //Test
     testImplementation(Libs.JUnit.junit)
+    testImplementation(Libs.Mockito.kotlin)
+    testImplementation(Libs.Mockito.inline)
+    testImplementation(Libs.Kotlin.Coroutines.test)
+    testImplementation(Libs.turbine)
+    testImplementation("io.mockk:mockk:1.13.2")
+
     androidTestImplementation(Libs.AndroidX.Test.Ext.junit)
     androidTestImplementation(Libs.AndroidX.Test.Espresso.contrib)
+    androidTestImplementation(Libs.AndroidX.Test.runner)
+    androidTestImplementation(Libs.AndroidX.Test.rules)
+    androidTestImplementation(Libs.Hilt.test)
+    androidTestImplementation(Libs.Kotlin.Coroutines.test)
+    kaptAndroidTest(Libs.Hilt.compiler)
+
+    androidTestImplementation(Libs.OkHttp3.mockWebServer)
 }
 
 // Allow references to generated code

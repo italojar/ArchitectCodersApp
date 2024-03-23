@@ -9,5 +9,6 @@ buildscript {
         classpath(es.architectcoders.buildSrc.Libs.Hilt.gradlePlugin)
         classpath(es.architectcoders.buildSrc.Libs.secretsGradlePlugin)
         classpath(es.architectcoders.buildSrc.Libs.AndroidX.Navigation.gradlePlugin)
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.10")
     }
 }
