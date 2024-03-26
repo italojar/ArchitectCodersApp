@@ -54,14 +54,19 @@ class RoversViewModelTest {
     @Test
     fun `Progress is shown when screen starts and hidden when it finishes requesting photos`() =
         runTest {
+            // Given(condiciones)
+            whenever(getRoversUseCase()).thenReturn(flowOf(photos))
+            whenever(requestRoversUseCase()).thenReturn(null)
             vm = buildViewModel()
-            vm.onUiReady()
 
+            // When(lo que estas testeando)
+
+            // Then(resultados esperados)
             vm.state.test {
                 assertEquals(RoversViewModel.UiState(), awaitItem())
-                assertEquals(RoversViewModel.UiState(photoList = photos), awaitItem())
-                assertEquals(RoversViewModel.UiState(photoList = photos, loading = true), awaitItem())
-                assertEquals(RoversViewModel.UiState(photoList = photos, loading = false), awaitItem())
+                assertEquals(RoversViewModel.UiState(loading = true), awaitItem())
+                assertEquals(RoversViewModel.UiState(loading = false), awaitItem())
+                assertEquals(RoversViewModel.UiState(photoList = photos, loading = false, error = null), awaitItem())
                 cancel()
             }
         }
@@ -69,16 +74,38 @@ class RoversViewModelTest {
     @Test
     fun `Photos are requested when UI screen starts`() = runTest {
         vm = buildViewModel()
-        vm.onUiReady()
-        runCurrent()
+        runCurrent()// wait for coroutines to finish
 
         verify(requestRoversUseCase).invoke()
     }
 
+//    @Test
+//    fun `Error is shown when photos cannot be requested`() = runTest {
+//        // Given
+//        vm = buildViewModelWithError()
+//        // When
+//
+//        // Then
+//        vm.state.test {
+//            assertEquals(RoversViewModel.UiState(), awaitItem())
+//            assertEquals(RoversViewModel.UiState(loading = true), awaitItem())
+//            assertEquals(RoversViewModel.UiState(loading = false), awaitItem())
+//            assertEquals(RoversViewModel.UiState(photoList = null, loading = false, error = Error.Unknown("Error unknown")), awaitItem())
+//            cancel()
+//        }
+//    }
     private fun buildViewModel() : RoversViewModel {
         whenever(getRoversUseCase()).thenReturn(flowOf(photos))
         return RoversViewModel(requestRoversUseCase, getRoversUseCase, saveRoverFavoriteUseCase)
     }
+
+//    private suspend fun buildViewModelWithError() : RoversViewModel {
+//        runTest {
+//            whenever(requestRoversUseCase()).thenReturn(Error.Unknown("Error unknown"))
+//            whenever(getRoversUseCase()).thenReturn(/*todo debe entrar en el catch y devolver un error*/)
+//        }
+//       return RoversViewModel(requestRoversUseCase, getRoversUseCase, saveRoverFavoriteUseCase)
+//    }
 }
 
 private val samplePhoto = Photo(
