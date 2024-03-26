@@ -1,15 +1,18 @@
 package es.architectcoders.spaceexplorer.ui.rovers
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import es.architectcoders.domain.Error
 import es.architectcoders.spaceexplorer.R
 import es.architectcoders.spaceexplorer.databinding.FragmentRoversBinding
 import es.architectcoders.spaceexplorer.ui.common.launchAndCollectT
+import es.architectcoders.spaceexplorer.ui.common.saveImageFromUrlToGallery
 
 @AndroidEntryPoint
 class RoversFragment : Fragment(R.layout.fragment_rovers) {
@@ -20,12 +23,27 @@ class RoversFragment : Fragment(R.layout.fragment_rovers) {
 
     private val viewModel: RoversViewModel by viewModels()
 
-    private val roversAdapter : RoversAdapter = RoversAdapter {
+    private lateinit var roversState: RoversState
+
+    private val onDownloadImageOnClick: (url: String, context: Context) -> Unit = { url, context ->
+        roversState.requestStoragePermission {
+            if (it) {
+                saveImageFromUrlToGallery(url, context)
+            }else{
+                Snackbar.make(requireView(), R.string.permission_denied, Snackbar.LENGTH_LONG).show()
+            }
+        }
+    }
+
+    private val roversAdapter : RoversAdapter = RoversAdapter (
+        onDownloadImageOnClick = onDownloadImageOnClick) {
         viewModel.saveRoversAsFavourite(it)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        roversState = buildRoversState()
 
         val binding = FragmentRoversBinding.bind(view).apply {
             rvRovers.adapter = roversAdapter
@@ -44,7 +62,6 @@ class RoversFragment : Fragment(R.layout.fragment_rovers) {
                 }
             }
         }
-        viewModel.onUiReady()
     }
 
     private fun showErrorDialog(error: String) {
