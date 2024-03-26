@@ -57,14 +57,6 @@ class RoversViewModel @Inject constructor(
         }
     }
 
-//    fun onUiReady() {
-//        viewModelScope.launch {
-//            _state.value = _state.value.copy(loading = true)
-//            val error = requestRoversUseCase()
-//            _state.update { _state.value.copy(loading = false, error = error) }
-//        }
-//    }
-
     data class UiState(
         val loading: Boolean = false,
         val photoList: List<Photo>? = null,
