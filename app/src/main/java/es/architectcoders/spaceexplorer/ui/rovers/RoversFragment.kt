@@ -6,6 +6,7 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import es.architectcoders.domain.Error
 import es.architectcoders.spaceexplorer.R
@@ -26,7 +27,11 @@ class RoversFragment : Fragment(R.layout.fragment_rovers) {
 
     private val onDownloadImageOnClick: (url: String, context: Context) -> Unit = { url, context ->
         roversState.requestStoragePermission {
-            saveImageFromUrlToGallery(url, context)
+            if (it) {
+                saveImageFromUrlToGallery(url, context)
+            }else{
+                Snackbar.make(requireView(), R.string.permission_denied, Snackbar.LENGTH_LONG).show()
+            }
         }
     }
 
