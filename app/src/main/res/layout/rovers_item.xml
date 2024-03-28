@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
     <data>
 
-        <import type="es.architectcoders.domain.Photo"/>
+        <import type="es.architectcoders.domain.Photo" />
 
         <variable
             name="photo"
@@ -14,93 +14,111 @@
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cvRover"
+        style="?attr/materialCardViewElevatedStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:clickable="true"
-        app:cardCornerRadius="16dp"
-        style="?attr/materialCardViewElevatedStyle"
-        android:focusable="true">
+        android:focusable="true"
+        app:cardCornerRadius="16dp">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-            <ImageView
-                android:id="@+id/ivRoverPhoto"
-                android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:scaleType="centerCrop"
-                app:url="@{photo.imgSrc}"
-                tools:src="@drawable/ic_nasa_logo"
-                android:contentDescription="@null"/>
 
-            <androidx.appcompat.widget.AppCompatImageButton
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:src="@{photo.favorite ? @drawable/ic_favorite_fill : @drawable/ic_favorite_empty}"
-                tools:src="@drawable/ic_favorite_fill"
-                android:background="@android:color/transparent"
-                android:padding="4dp"
-                android:layout_gravity="end"
-                android:clickable="true"
-                android:focusable="true"
-                android:contentDescription="@null"/>
+                <ImageView
+                    android:id="@+id/ivRoverPhoto"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:contentDescription="@null"
+                    android:scaleType="centerCrop"
+                    app:url="@{photo.imgSrc}"
+                    tools:src="@drawable/ic_nasa_logo" />
 
-            <ImageButton
-                android:id="@+id/ibDownload"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:src="@drawable/download_24"
-                android:background="@android:color/transparent"
-                android:layout_marginTop="48dp"
-                android:layout_gravity="top|end"
-                android:clickable="true"
-                android:focusable="true"
-                android:contentDescription="@null"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:layout_margin="8dp"
+                    android:layout_marginBottom="4dp"
+                    android:background="@color/navigation_bar"
+                    android:fontFamily="@font/rubik_regular"
+                    android:padding="4dp"
+                    android:text="@{@string/id(photo.id)}"
+                    android:textStyle="bold"
+                    tools:text="Id: 12345" />
+
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_gravity="end"
+                    android:background="@android:color/transparent"
+                    android:clickable="true"
+                    android:contentDescription="@null"
+                    android:focusable="true"
+                    android:padding="4dp"
+                    android:src="@{photo.favorite ? @drawable/ic_favorite_fill : @drawable/ic_favorite_empty}"
+                    tools:src="@drawable/ic_favorite_fill" />
 
                 <ImageButton
-                android:id="@+id/ibExpand"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:src="@drawable/ic_expand_more"
-                android:background="@android:color/transparent"
-                android:layout_gravity="bottom|end"
-                android:clickable="true"
-                android:focusable="true"
-                android:contentDescription="@null"/>
-            </FrameLayout>
-        <LinearLayout
-            android:id="@+id/llData"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:visibility="gone"
-            tools:visibility="visible">
+                    android:id="@+id/ibDownload"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_gravity="top|end"
+                    android:layout_marginTop="48dp"
+                    android:background="@android:color/transparent"
+                    android:clickable="true"
+                    android:contentDescription="@null"
+                    android:focusable="true"
+                    android:src="@drawable/download_24" />
 
-            <TextView
-                android:id="@+id/tvSol"
+                <ImageButton
+                    android:id="@+id/ibExpand"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_gravity="bottom|end"
+                    android:background="@android:color/transparent"
+                    android:clickable="true"
+                    android:contentDescription="@null"
+                    android:focusable="true"
+                    android:src="@drawable/ic_expand_more" />
+            </FrameLayout>
+
+            <LinearLayout
+                android:id="@+id/llData"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="4dp"
-                android:layout_marginBottom="4dp"
-                android:text="@{@string/sol(photo.sol)}"
-                android:fontFamily="@font/rubik_regular"
-                tools:text="Camara navigation"/>
-            <TextView
-                android:id="@+id/tvEarthDate"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="4dp"
-                android:layout_marginBottom="8dp"
-                android:text="@{@string/earth_date(photo.earthDate)}"
-                android:fontFamily="@font/rubik_regular"
-                tools:text="Earth date: 2022-01-01"/>
-        </LinearLayout>
+                android:orientation="vertical"
+                android:visibility="gone"
+                tools:visibility="visible">
+
+                <TextView
+                    android:id="@+id/tvSol"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="4dp"
+                    android:fontFamily="@font/rubik_regular"
+                    android:text="@{@string/sol(photo.sol)}"
+                    tools:text="Camara navigation" />
+
+                <TextView
+                    android:id="@+id/tvEarthDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="8dp"
+                    android:fontFamily="@font/rubik_regular"
+                    android:text="@{@string/earth_date(photo.earthDate)}"
+                    tools:text="Earth date: 2022-01-01" />
+            </LinearLayout>
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 </layout>
