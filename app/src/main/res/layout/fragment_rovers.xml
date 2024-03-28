@@ -41,6 +41,7 @@
             android:layout_gravity="center"
             android:layout_margin="@dimen/common_padding_default"
             android:indeterminate="true"
+            app:indicatorColor="@color/blue_dark"
             app:visible="@{loading}" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
