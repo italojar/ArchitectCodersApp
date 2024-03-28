@@ -1,4 +1,4 @@
-package es.architectcoders.spaceexplorer.ui.notifications
+package es.architectcoders.spaceexplorer.ui.mars
 
 import android.os.Bundle
 import android.view.View
@@ -8,20 +8,24 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
 import es.architectcoders.domain.Error
 import es.architectcoders.spaceexplorer.R
-import es.architectcoders.spaceexplorer.databinding.FragmentNotificationsBinding
+import es.architectcoders.spaceexplorer.databinding.FragmentMarsBinding
 import es.architectcoders.spaceexplorer.ui.common.launchAndCollectT
 
 @AndroidEntryPoint
-class NotificationsFragment : Fragment(R.layout.fragment_notifications) {
+class MarsFragment : Fragment(R.layout.fragment_mars) {
 
-    private val viewModel: NotificationsViewModel by viewModels()
+    companion object {
+        fun newInstance() = MarsFragment()
+    }
+
+    private val viewModel: MarsViewModel by viewModels()
 
     private val notificationsAdapter: NotificationsAdapter = NotificationsAdapter()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val binding = FragmentNotificationsBinding.bind(view).apply {
+        val binding = FragmentMarsBinding.bind(view).apply {
             rvNotifications.adapter = notificationsAdapter
         }
         viewLifecycleOwner.launchAndCollectT(viewModel.state) {

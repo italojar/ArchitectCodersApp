@@ -6,7 +6,7 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.textview.MaterialTextView
 import es.architectcoders.domain.NotificationsItem
-import es.architectcoders.spaceexplorer.ui.notifications.NotificationsAdapter
+import es.architectcoders.spaceexplorer.ui.mars.NotificationsAdapter
 import java.text.SimpleDateFormat
 import java.util.Locale
 import java.util.TimeZone

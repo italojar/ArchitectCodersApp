@@ -2,13 +2,12 @@
     <string name="app_name">Space Explorer</string>
     <string name="home">Home</string>
     <string name="rovers">Rovers</string>
-    <string name="notifications">Notifications</string>
+    <string name="mars">Mars</string>
     <string name="favourite">Favourite</string>
     <string name="see_more"><u>See more</u></string>
     <string name="copyright">© %1$s</string>
     <string name="earth_date">Earth date: %s</string>
     <string name="sol">Sol: %s</string>
-    <string name="id">Id: %s</string>
     <!-- error messages -->
     <string name="server_error">The data could not be obtained.</string>
     <string name="connectivity_error">Please, check your connection.</string>

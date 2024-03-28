@@ -11,10 +11,10 @@
         android:icon="@drawable/ic_bottom_nav_rocket"
         android:title="@string/rovers"/>
     <item
-        android:id="@+id/notificationsFragment"
+        android:id="@+id/marsFragment"
         android:enabled="true"
-        android:icon="@drawable/ic_bottom_nav_notifications"
-        android:title="@string/notifications"/>
+        android:icon="@drawable/ic_bottom_nav_explore"
+        android:title="@string/mars"/>
     <item
         android:id="@+id/favouriteFragment"
         android:enabled="true"

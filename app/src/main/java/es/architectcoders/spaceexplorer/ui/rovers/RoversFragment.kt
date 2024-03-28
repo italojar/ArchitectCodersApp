@@ -44,6 +44,7 @@ class RoversFragment : Fragment(R.layout.fragment_rovers) {
                 }
             }
         }
+        viewModel.onUiReady()
     }
 
     private fun showErrorDialog(error: String) {

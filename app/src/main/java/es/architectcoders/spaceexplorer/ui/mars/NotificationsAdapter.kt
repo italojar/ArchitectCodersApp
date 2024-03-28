@@ -1,4 +1,4 @@
-package es.architectcoders.spaceexplorer.ui.notifications
+package es.architectcoders.spaceexplorer.ui.mars
 
 import android.view.View
 import android.view.ViewGroup
