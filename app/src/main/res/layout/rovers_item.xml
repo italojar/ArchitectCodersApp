@@ -49,7 +49,7 @@
                     android:layout_marginBottom="4dp"
                     android:fontFamily="@font/rubik_regular"
                     android:text="@{@string/id(photo.id)}"
-                    android:background="@color/status_bar"
+                    android:background="@color/navigation_bar"
                     android:textStyle="bold"
                     tools:text="Id: 12345" />
 
