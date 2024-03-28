@@ -21,6 +21,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.NavController
 import androidx.recyclerview.widget.DiffUtil
+import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.SimpleTarget
 import com.bumptech.glide.request.transition.Transition
@@ -41,7 +42,16 @@ fun MenuItem.onHomeSelected(navController: NavController) {
 }
 
 fun ImageView.loadUrl(url: String?) {
-    Glide.with(context).load(url).error(R.mipmap.ic_launcher).into(this)
+    val circularProgressDrawable = CircularProgressDrawable(context).apply {
+        strokeWidth = 5f
+        centerRadius = 30f
+        setColorSchemeColors(resources.getColor(R.color.blue_dark, null))
+    }
+    circularProgressDrawable.start()
+    Glide.with(context).load(url)
+        .error(R.mipmap.ic_launcher)
+        .placeholder(circularProgressDrawable)
+        .into(this)
 }
 
 fun saveImageFromUrlToGallery(imageUrl: String, context: Context) {
