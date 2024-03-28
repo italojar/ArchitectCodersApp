@@ -12,6 +12,6 @@ data class Photo(
     override var favorite: Boolean,
     val sol: String,
     val imgSrc: String,
-    override var id: Int,
+    override var id: String,
     val earthDate: String
 ) : NasaItem

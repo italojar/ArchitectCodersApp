@@ -1,7 +1,7 @@
 package es.architectcoders.domain
 
 data class Apod(
-    override var id: Int,
+    override var id: String,
     val copyright: String,
     override val date: String,
     override val explanation: String,

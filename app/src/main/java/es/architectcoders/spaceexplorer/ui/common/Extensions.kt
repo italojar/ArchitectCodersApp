@@ -1,5 +1,11 @@
 package es.architectcoders.spaceexplorer.ui.common
 
+import android.content.ContentValues
+import android.content.Context
+import android.graphics.Bitmap
+import android.os.Build
+import android.os.Environment
+import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
@@ -7,6 +13,7 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.annotation.LayoutRes
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
@@ -15,14 +22,17 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.NavController
 import androidx.recyclerview.widget.DiffUtil
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.target.SimpleTarget
+import com.bumptech.glide.request.transition.Transition
 import es.architectcoders.domain.Apod
 import es.architectcoders.spaceexplorer.R
 import es.architectcoders.spaceexplorer.ui.model.ApodObject
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
-
-
+import java.io.File
+import java.io.FileOutputStream
+import java.io.OutputStream
 fun MenuItem.onHomeSelected(navController: NavController) {
     this.setOnMenuItemClickListener { menuItem ->
         navController.navigate(menuItem.itemId)
@@ -34,7 +44,43 @@ fun ImageView.loadUrl(url: String?) {
     Glide.with(context).load(url).error(R.mipmap.ic_launcher).into(this)
 }
 
-    fun LinearLayout.toggleVisibilityWithAnimation(imageButton: ImageButton, duration: Long = 200) {
+fun saveImageFromUrlToGallery(imageUrl: String, context: Context) {
+    Glide.with(context)
+        .asBitmap()
+        .load(imageUrl)
+        .into(object : SimpleTarget<Bitmap>() {
+            override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
+                saveBitmapToGallery(resource, context)
+            }
+        })
+}
+
+private fun saveBitmapToGallery(bitmap: Bitmap, context: Context) {
+    val fileName = "${System.currentTimeMillis()}.jpg"
+    var outputStream: OutputStream? = null
+
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+        val resolver = context.contentResolver
+        val contentValues = ContentValues().apply {
+            put(MediaStore.MediaColumns.DISPLAY_NAME, fileName)
+            put(MediaStore.MediaColumns.MIME_TYPE, "image/jpeg")
+            put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_PICTURES)
+        }
+        val imageUri = resolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues)
+        outputStream = imageUri?.let { resolver.openOutputStream(it) }
+    } else {
+        val imagesDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
+        val image = File(imagesDir, fileName)
+        outputStream = FileOutputStream(image)
+    }
+
+    outputStream?.use {
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, it)
+        Toast.makeText(context, "Imagen guardada en la galería", Toast.LENGTH_SHORT).show()
+    }
+}
+
+fun LinearLayout.toggleVisibilityWithAnimation(imageButton: ImageButton, duration: Long = 200) {
     if (visibility == View.VISIBLE) {
         animateVisibilityWithAnimation(false, duration, imageButton)
     } else {
@@ -96,7 +142,7 @@ fun <T> LifecycleOwner.launchAndCollectT(
 }
 
 fun ApodObject.toDomain() = Apod(
-    id = id,
+    id = id.toString(),
     copyright = copyright,
     date = date,
     explanation = explanation,
@@ -109,7 +155,7 @@ fun ApodObject.toDomain() = Apod(
 )
 
 fun Apod.toViewObject() = ApodObject(
-    id = id,
+    id = id.toInt(),
     copyright = copyright,
     date = date,
     explanation = explanation,

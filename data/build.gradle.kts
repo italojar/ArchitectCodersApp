@@ -1,3 +1,5 @@
+import es.architectcoders.buildSrc.Libs
+
 plugins {
     id("java-library")
     id("org.jetbrains.kotlin.jvm")
@@ -10,12 +12,13 @@ java {
 
 dependencies {
     implementation(project(mapOf("path" to ":domain")))
-    // Corrutinas
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
+
+    // Coroutines
+    implementation(Libs.Kotlin.Coroutines.core)
     // Javax inject
-    implementation("javax.inject:javax.inject:1")
+    implementation(Libs.JavaX.inject)
     // Arrow kt
-    implementation("io.arrow-kt:arrow-core:1.1.5")
+    implementation(Libs.Arrow.core)
     //Test
-    testImplementation("junit:junit:4.13.2")
+    testImplementation(Libs.JUnit.junit)
 }

@@ -5,15 +5,13 @@ import arrow.core.left
 import arrow.core.right
 import es.architectcoders.domain.Apod
 import es.architectcoders.domain.Error
-import es.architectcoders.domain.Photo
 import es.architectcoders.spaceexplorer.framework.database.apodDb.ApodEntity
-import es.architectcoders.spaceexplorer.framework.database.roverDb.PhotoEntity
 import es.architectcoders.spaceexplorer.framework.server.apodServer.ApodResponse
 import retrofit2.HttpException
 import java.io.IOException
 
 fun Apod.toEntity() = ApodEntity(
-    id = id,
+    id = id.toInt(),
     copyright = copyright,
     date = date,
     explanation = explanation,
@@ -26,7 +24,7 @@ fun Apod.toEntity() = ApodEntity(
 )
 
 fun ApodEntity.toDomain() = Apod(
-    id = this.id,
+    id = this.id.toString(),
     copyright = this.copyright,
     date = this.date,
     explanation = this.explanation,
@@ -52,7 +50,7 @@ fun ApodResponse.toEntity() = ApodEntity(
 )
 
 fun ApodResponse.toDomain() = Apod(
-    id = this.id,
+    id = this.id.toString(),
     copyright = this.copyright ?: "",
     date = this.date,
     explanation = this.explanation,

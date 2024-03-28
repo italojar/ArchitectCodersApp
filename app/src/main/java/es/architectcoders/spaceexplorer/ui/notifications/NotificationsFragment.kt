@@ -1,57 +1,32 @@
-package es.architectcoders.spaceexplorer.ui.rovers
+package es.architectcoders.spaceexplorer.ui.notifications
 
-import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import es.architectcoders.domain.Error
 import es.architectcoders.spaceexplorer.R
-import es.architectcoders.spaceexplorer.databinding.FragmentRoversBinding
+import es.architectcoders.spaceexplorer.databinding.FragmentNotificationsBinding
 import es.architectcoders.spaceexplorer.ui.common.launchAndCollectT
-import es.architectcoders.spaceexplorer.ui.common.saveImageFromUrlToGallery
 
 @AndroidEntryPoint
-class RoversFragment : Fragment(R.layout.fragment_rovers) {
+class NotificationsFragment : Fragment(R.layout.fragment_notifications) {
 
-    companion object {
-        fun newInstance() = RoversFragment()
-    }
+    private val viewModel: NotificationsViewModel by viewModels()
 
-    private val viewModel: RoversViewModel by viewModels()
-
-    private lateinit var roversState: RoversState
-
-    private val onDownloadImageOnClick: (url: String, context: Context) -> Unit = { url, context ->
-        roversState.requestStoragePermission {
-            if (it) {
-                saveImageFromUrlToGallery(url, context)
-            }else{
-                Snackbar.make(requireView(), R.string.permission_denied, Snackbar.LENGTH_LONG).show()
-            }
-        }
-    }
-
-    private val roversAdapter : RoversAdapter = RoversAdapter (
-        onDownloadImageOnClick = onDownloadImageOnClick) {
-        viewModel.saveRoversAsFavourite(it)
-    }
+    private val notificationsAdapter: NotificationsAdapter = NotificationsAdapter()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        roversState = buildRoversState()
-
-        val binding = FragmentRoversBinding.bind(view).apply {
-            rvRovers.adapter = roversAdapter
+        val binding = FragmentNotificationsBinding.bind(view).apply {
+            rvNotifications.adapter = notificationsAdapter
         }
-
         viewLifecycleOwner.launchAndCollectT(viewModel.state) {
             binding.loading = it.loading
-            binding.photoList = it.photoList
+            binding.notificationsList = it.notificationsList
             binding.error = it.error.also { error ->
                 if (error != null) {
                     when (error) {

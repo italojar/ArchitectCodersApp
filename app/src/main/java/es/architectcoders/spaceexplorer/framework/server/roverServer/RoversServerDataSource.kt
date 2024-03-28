@@ -26,7 +26,7 @@ class RoversServerDataSource @Inject constructor(@ApiKey private val apiKey: Str
     private fun PhotoResponse.toDomain() : Photo =
         Photo(
             earthDate = earthDate,
-            id = id,
+            id = id.toString(),
             imgSrc = imgSrc.replace("http://", "https://"),
             sol = sol.toString(),
             favorite = false,
