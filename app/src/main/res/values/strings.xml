@@ -2,7 +2,7 @@
     <string name="app_name">Space Explorer</string>
     <string name="home">Home</string>
     <string name="rovers">Rovers</string>
-    <string name="mars">Mars</string>
+    <string name="notifications">Notifications</string>
     <string name="favourite">Favourite</string>
     <string name="see_more"><u>See more</u></string>
     <string name="copyright">© %1$s</string>

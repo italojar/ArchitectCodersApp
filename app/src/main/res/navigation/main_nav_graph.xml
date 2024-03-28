@@ -24,10 +24,10 @@
         android:label="fragment_rovers"
         tools:layout="@layout/fragment_rovers" />
     <fragment
-        android:id="@+id/marsFragment"
-        android:name="es.architectcoders.spaceexplorer.ui.mars.MarsFragment"
+        android:id="@+id/notificationsFragment"
+        android:name="es.architectcoders.spaceexplorer.ui.notifications.NotificationsFragment"
         android:label="fragment_mars"
-        tools:layout="@layout/fragment_mars" />
+        tools:layout="@layout/fragment_notifications" />
     <fragment
         android:id="@+id/favouriteFragment"
         android:name="es.architectcoders.spaceexplorer.ui.favourite.FavouriteFragment"
