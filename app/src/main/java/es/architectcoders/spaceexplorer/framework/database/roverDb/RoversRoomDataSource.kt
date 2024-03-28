@@ -36,7 +36,7 @@ private fun List<DbPhoto>.toDomain(): List<Photo> = map { it.toDomain() }
 private fun DbPhoto.toDomain(): Photo =
     Photo(
         earthDate,
-        id,
+        id.toString(),
         imgSrc,
         sol,
         favorite
@@ -47,7 +47,7 @@ private fun List<Photo>.fromDomain(): List<DbPhoto> = map { it.fromDomain() }
 private fun Photo.fromDomain(): DbPhoto =
     DbPhoto(
         earthDate,
-        id,
+        id.toInt(),
         imgSrc,
         sol,
         favorite

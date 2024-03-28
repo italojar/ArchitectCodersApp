@@ -13,8 +13,8 @@
     <item
         android:id="@+id/marsFragment"
         android:enabled="true"
-        android:icon="@drawable/ic_bottom_nav_explore"
-        android:title="@string/mars"/>
+        android:icon="@drawable/ic_bottom_nav_notifications"
+        android:title="@string/notifications"/>
     <item
         android:id="@+id/favouriteFragment"
         android:enabled="true"
