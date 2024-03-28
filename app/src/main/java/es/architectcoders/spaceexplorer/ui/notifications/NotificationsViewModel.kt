@@ -1,4 +1,4 @@
-package es.architectcoders.spaceexplorer.ui.mars
+package es.architectcoders.spaceexplorer.ui.notifications
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -17,7 +17,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class MarsViewModel @Inject constructor(
+class NotificationsViewModel @Inject constructor(
     private val requestNotificationsUseCase: RequestNotificationsUseCase,
     getNotificationsUseCase: GetNotificationsUseCase
 ) : ViewModel() {
