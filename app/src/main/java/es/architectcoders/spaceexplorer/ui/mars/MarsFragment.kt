@@ -41,7 +41,6 @@ class MarsFragment : Fragment(R.layout.fragment_mars) {
                 }
             }
         }
-        viewModel.onUiReady()
     }
     private fun showErrorDialog(error: String) {
         MaterialAlertDialogBuilder(requireContext())

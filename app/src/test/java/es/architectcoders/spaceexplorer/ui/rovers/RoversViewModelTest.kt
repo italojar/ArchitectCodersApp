@@ -1,21 +1,26 @@
 package es.architectcoders.spaceexplorer.ui.rovers
 
 import app.cash.turbine.test
+import es.architectcoders.domain.Error.*
 import es.architectcoders.domain.Photo
+import es.architectcoders.spaceexplorer.framework.toError
 import es.architectcoders.spaceexplorer.testRules.CoroutinesTestRules
 import es.architectcoders.usecases.GetRoversUseCase
 import es.architectcoders.usecases.RequestRoversUseCase
 import es.architectcoders.usecases.SaveRoversFavoriteUseCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runCurrent
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNull
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.junit.MockitoJUnitRunner
+import org.mockito.kotlin.times
 import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
 
@@ -46,37 +51,122 @@ class RoversViewModelTest {
 
         vm.state.test {
             assertEquals(RoversViewModel.UiState(), awaitItem())
+            assertEquals(RoversViewModel.UiState(loading = true), awaitItem())
+            assertEquals(RoversViewModel.UiState(loading = false, error = null), awaitItem())
             assertEquals(RoversViewModel.UiState(photoList = photos), awaitItem())
-            cancel()
+            cancelAndConsumeRemainingEvents()
         }
     }
 
     @Test
     fun `Progress is shown when screen starts and hidden when it finishes requesting photos`() =
         runTest {
+            // Given(condiciones)
+            whenever(getRoversUseCase()).thenReturn(flowOf(photos))
+            whenever(requestRoversUseCase()).thenReturn(null)
             vm = buildViewModel()
-            vm.onUiReady()
 
+            // When(lo que estas testeando)
+
+            // Then(resultados esperados)
             vm.state.test {
                 assertEquals(RoversViewModel.UiState(), awaitItem())
-                assertEquals(RoversViewModel.UiState(photoList = photos), awaitItem())
-                assertEquals(RoversViewModel.UiState(photoList = photos, loading = true), awaitItem())
-                assertEquals(RoversViewModel.UiState(photoList = photos, loading = false), awaitItem())
-                cancel()
+                assertEquals(RoversViewModel.UiState(loading = true), awaitItem())
+                assertEquals(RoversViewModel.UiState(loading = false), awaitItem())
+                assertEquals(RoversViewModel.UiState(photoList = photos, loading = false, error = null), awaitItem())
+                cancelAndConsumeRemainingEvents()
             }
         }
 
     @Test
     fun `Photos are requested when UI screen starts`() = runTest {
         vm = buildViewModel()
-        vm.onUiReady()
-        runCurrent()
+        runCurrent()// wait for coroutines to finish
 
         verify(requestRoversUseCase).invoke()
     }
 
+    @Test
+    fun `Error is shown when photos cannot be requested`() = runTest {
+        // Given
+        val error = Unknown("Error unknown")
+        whenever(requestRoversUseCase()).thenReturn(error)
+        vm = buildViewModel()
+        // When
+
+        // Then
+        vm.state.test {
+            assertEquals(RoversViewModel.UiState(), awaitItem())
+            assertEquals(RoversViewModel.UiState(loading = true), awaitItem())
+            assertEquals(RoversViewModel.UiState(photoList = null, loading = false, error = error), awaitItem())
+            cancelAndConsumeRemainingEvents()
+        }
+    }
+    @Test
+    fun `Error is shown when photos cannot be obtained from room`() = runTest {
+        // Given
+        val error = Throwable("Error unknown")
+        vm = buildViewModelWithRoomError()
+        // When
+
+        // Then
+        vm.state.test {
+            assertEquals(RoversViewModel.UiState(), awaitItem())
+            assertEquals(RoversViewModel.UiState(loading = true), awaitItem())
+            assertEquals(RoversViewModel.UiState(photoList = null, loading = false, error = null), awaitItem())
+            assertEquals(RoversViewModel.UiState(photoList = null, loading = false, error = error.toError()), awaitItem())
+            cancelAndConsumeRemainingEvents()
+        }
+    }
+
+    @Test
+    fun `Photo is saved as favorite`() = runTest {
+        // Given
+        val photo = samplePhoto.copy(id = 1)
+        vm = buildViewModelWithRoomError()
+        // When
+        vm.saveRoversAsFavourite(photo)
+        // Then
+        vm.state.test {
+            assertNull(RoversViewModel.UiState(error = null).error)
+            cancelAndConsumeRemainingEvents()
+        }
+    }
+
+    @Test
+    fun `Photo isn't saved as favorite`() = runTest {
+        // Given
+        val photo = samplePhoto.copy(id = 1)
+        vm = buildViewModelWithRoomError()
+
+        // When
+        vm.saveRoversAsFavourite(photo)
+
+        // Then
+        vm.state.test {
+            assertEquals(RoversViewModel.UiState(error = null), awaitItem())
+            cancelAndConsumeRemainingEvents()
+        }
+    }
+    @Test
+    fun `When press retry launches to request`() = runTest {
+        // Given
+        vm = buildViewModelWithRoomError()
+
+        // When
+        vm.retry()
+        runCurrent()// wait for coroutines to finish
+        // Then
+        verify(requestRoversUseCase, times(2)).invoke()
+    }
+
     private fun buildViewModel() : RoversViewModel {
         whenever(getRoversUseCase()).thenReturn(flowOf(photos))
+        return RoversViewModel(requestRoversUseCase, getRoversUseCase, saveRoverFavoriteUseCase)
+    }
+    private fun buildViewModelWithRoomError() : RoversViewModel {
+        val error = Throwable("Error unknown")
+        whenever(getRoversUseCase()).thenReturn(flow { throw error })
         return RoversViewModel(requestRoversUseCase, getRoversUseCase, saveRoverFavoriteUseCase)
     }
 }
