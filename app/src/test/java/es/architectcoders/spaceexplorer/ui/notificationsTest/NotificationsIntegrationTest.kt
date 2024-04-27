@@ -4,10 +4,10 @@ import app.cash.turbine.test
 import es.architectcoders.data.repository.NotificationsRepository
 import es.architectcoders.domain.NotificationsItem
 import es.architectcoders.spaceexplorer.testRules.CoroutinesTestRules
-import es.architectcoders.spaceexplorer.ui.FakeNotificationsLocalDataSource
-import es.architectcoders.spaceexplorer.ui.FakeNotificationsRemoteDataSource
+import es.architectcoders.spaceexplorer.apptestshared.FakeNotificationsLocalDataSource
+import es.architectcoders.spaceexplorer.apptestshared.FakeNotificationsRemoteDataSource
 import es.architectcoders.spaceexplorer.ui.mars.MarsViewModel
-import es.architectcoders.spaceexplorer.ui.sampleNotificationItem
+import es.architectcoders.spaceexplorer.apptestshared.sampleNotificationItem
 import es.architectcoders.usecases.GetNotificationsUseCase
 import es.architectcoders.usecases.RequestNotificationsUseCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi

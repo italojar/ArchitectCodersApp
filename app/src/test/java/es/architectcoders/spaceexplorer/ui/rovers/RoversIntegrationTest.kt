@@ -4,9 +4,9 @@ import app.cash.turbine.test
 import es.architectcoders.data.repository.RoversRepository
 import es.architectcoders.domain.Photo
 import es.architectcoders.spaceexplorer.testRules.CoroutinesTestRules
-import es.architectcoders.spaceexplorer.ui.FakeRoversLocalDataSource
-import es.architectcoders.spaceexplorer.ui.FakeRoversRemoteDataSource
-import es.architectcoders.spaceexplorer.ui.samplePhoto
+import es.architectcoders.spaceexplorer.apptestshared.FakeRoversLocalDataSource
+import es.architectcoders.spaceexplorer.apptestshared.FakeRoversRemoteDataSource
+import es.architectcoders.spaceexplorer.apptestshared.samplePhoto
 import es.architectcoders.usecases.GetRoversUseCase
 import es.architectcoders.usecases.RequestRoversUseCase
 import es.architectcoders.usecases.SaveRoversFavoriteUseCase

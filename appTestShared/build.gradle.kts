@@ -35,4 +35,9 @@ android {
 dependencies {
 
    implementation (project (":app"))
+   implementation (project (":data"))
+   implementation (project (":domain"))
+
+    // Arrow kt
+    implementation("io.arrow-kt:arrow-core:1.1.5")
 }

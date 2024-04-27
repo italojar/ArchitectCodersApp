@@ -1,12 +1,12 @@
-package es.architectcoders.spaceexplorer.ui
+package es.architectcoders.spaceexplorer.apptestshared
 
 import arrow.core.right
 import es.architectcoders.data.datasource.NotificationsLocalDataSource
 import es.architectcoders.data.datasource.NotificationsRemoteDataSource
-import es.architectcoders.domain.Error
 import es.architectcoders.domain.NotificationsItem
 import kotlinx.coroutines.flow.MutableStateFlow
 import java.util.Calendar
+import es.architectcoders.domain.Error
 
 val sampleNotificationItem = NotificationsItem(
     "2014-05-08T12:43Z",

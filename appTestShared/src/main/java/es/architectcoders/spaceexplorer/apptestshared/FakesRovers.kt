@@ -1,12 +1,12 @@
-package es.architectcoders.spaceexplorer.ui
+package es.architectcoders.spaceexplorer.apptestshared
 
 import arrow.core.right
 import es.architectcoders.data.datasource.RoversLocalDataSource
 import es.architectcoders.data.datasource.RoversRemoteDataSource
-import es.architectcoders.domain.Error
 import es.architectcoders.domain.Photo
 import kotlinx.coroutines.flow.MutableStateFlow
 import java.util.Calendar
+import es.architectcoders.domain.Error
 
 val samplePhoto = Photo(
     "2023-01-01",
