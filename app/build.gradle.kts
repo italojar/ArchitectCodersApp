@@ -89,10 +89,6 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.1")
     // Hilt
     implementation("com.google.dagger:hilt-android:2.49")
-    testImplementation(project(":testShared"))
-    testImplementation(project(":appTestShared"))
-    testImplementation(project(":data"))
-    testImplementation(project(":usecases"))
     kapt("com.google.dagger:hilt-compiler:2.49")
     // Livedata
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.2")
@@ -123,10 +119,18 @@ dependencies {
     testImplementation("org.mockito:mockito-inline:4.8.0")
     //Turbine
     testImplementation("app.cash.turbine:turbine:0.12.1")
+    //Runner
+    implementation ("androidx.test:runner:1.5.2")
+    //Rules
+    implementation ("androidx.test:rules:1.5.0")
     //Test
     testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    testImplementation(project(":testShared"))
+    testImplementation(project(":appTestShared"))
+    testImplementation(project(":data"))
+    testImplementation(project(":usecases"))
+    androidTestImplementation("androidx.test.ext:junit-ktx:1.1.5")
+    androidTestImplementation("androidx.test.espresso:espresso-contrib:3.5.1")
     androidTestImplementation(project(":appTestShared"))
 
 }
