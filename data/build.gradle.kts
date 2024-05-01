@@ -9,8 +9,8 @@ java {
 }
 
 dependencies {
-    implementation(project(mapOf("path" to ":domain")))
-    implementation(project(mapOf("path" to ":testShared")))
+    implementation(project(":domain"))
+    implementation(project(":testShared"))
     // Corrutinas
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.1")

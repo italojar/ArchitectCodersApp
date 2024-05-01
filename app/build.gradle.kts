@@ -61,10 +61,10 @@ android {
 }
 
 dependencies {
-    implementation(project(mapOf("path" to ":domain")))
-    implementation(project(mapOf("path" to ":usecases")))
-    implementation(project(mapOf("path" to ":data")))
-    implementation(project(mapOf("path" to ":testShared")))
+    implementation(project(":domain"))
+    implementation(project(":usecases"))
+    implementation(project(":data"))
+    implementation(project(":testShared"))
 
     //Core
     implementation("androidx.core:core-ktx:1.12.0")
